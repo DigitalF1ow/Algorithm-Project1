@@ -7,7 +7,7 @@
 
 using namespace std;
 
-int main()
+void main()
 {
     cout << "Hello World" << endl;
     cout << "We are going to randomize the emails into each of the following formats:" << endl;
@@ -18,8 +18,6 @@ int main()
     int sizeA = 100;
     int sizeB = 100000;
     int sizeC = 500000;
-
-    int totalSize = sizeA + sizeB + sizeC;
 
     string *setAEmail  = new string[sizeA];
     string *setBEmail  = new string[sizeB];
@@ -75,7 +73,7 @@ int main()
     }
 
     ofstream writerFile;
-    
+
     writerFile.open("EmailSetA.txt");
     cout << "Creating a set of emails for Set A" << endl;
 
