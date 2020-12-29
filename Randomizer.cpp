@@ -32,7 +32,7 @@ int main()
     string generatedEmail;
     srand(time(NULL));
     
-    //Creating a loop to insert the randomly generated emails into the txt file
+    //Creating a loop to insert the randomly generated emails into the txt file - coming soon
     auto start = std::chrono::high_resolution_clock::now();
 
     for (int i = 0; i < totalSize; i++)
@@ -61,7 +61,6 @@ int main()
 
         if (i < sizeA)
         {
-            
             setAEmail[i] = generatedEmail;
         }
         if (i < sizeB)
@@ -75,7 +74,7 @@ int main()
         generatedEmail = "";
     }
 
-    
+    //List out all of the email addresses for each of the following datasets
     for (int i = 0; i < sizeA; i++)
     {
         printf("Generated Email A %d: %s \n", i + 1, setAEmail[i].c_str());
