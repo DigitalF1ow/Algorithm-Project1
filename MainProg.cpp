@@ -80,7 +80,22 @@ void chainingMethod()
     {
         cout << "Error - That is an invalid choice!" << endl;
     }
-    
+
+    int target;
+    cout << "target to retrieve: " << endl;
+    cin >> target;
+
+
+
+    if (ht.resize(target))
+    {
+        cout << "Target has been found!" << endl;
+    }
+    else
+    {
+        cout << "Target has been not been found!" << endl;
+        /* code */
+    }    
 
 }
 
