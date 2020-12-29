@@ -35,7 +35,7 @@ int main()
     //Creating a loop to insert the randomly generated emails into the txt file - coming soon
     auto start = std::chrono::high_resolution_clock::now();
 
-    for (int i = 0; i < totalSize; i++)
+    for (int i = 0; i < sizeC; i++)
     {
         for (int i = 0; i < 5; i++)
         {
@@ -74,26 +74,40 @@ int main()
         generatedEmail = "";
     }
 
-    //List out all of the email addresses for each of the following datasets
+    ofstream writerFile;
+    
+    writerFile.open("EmailSetA.txt");
+    cout << "Creating a set of emails for Set A" << endl;
+
+    //Adding in all of the email addresses for each of the following datasets
     for (int i = 0; i < sizeA; i++)
     {
-        printf("Generated Email A %d: %s \n", i + 1, setAEmail[i].c_str());
+        //printf("Generated Email A %d: %s \n", i + 1, setAEmail[i].c_str());
+        writerFile << setAEmail[i].c_str() << endl;
         //cout << "Generated Email A %s: " << setAEmail[i] << endl;
     }
+    writerFile.close();
+    cout << "Creating a set of emails for Set B" << endl;
+    writerFile.open("EmailSetB.txt");
     
     for (int i = 0; i < sizeB; i++)
     {
-        printf("Generated Email B %d: %s \n", i + 1, setBEmail[i].c_str());
+        writerFile << setBEmail[i].c_str() << endl;
+        //printf("Generated Email B %d: %s \n", i + 1, setBEmail[i].c_str());
         //cout << "Generated Email B %s: " << setAEmail[i] << endl;
     }
-
+    writerFile.close();
+    cout << "Creating a set of emails for Set C" << endl;
+    writerFile.open("EmailSetC.txt");
     for (int i = 0; i < sizeC; i++)
     {
-        printf("Generated Email C %d: %s \n", i + 1, setCEmail[i].c_str());
+        writerFile << setCEmail[i].c_str() << endl;
+        //printf("Generated Email C %d: %s \n", i + 1, setCEmail[i].c_str());
         //cout << "Generated Email B %s: " << setAEmail[i] << endl;
     }
-    
+    writerFile.close();
+
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::seconds>(end - start);
-    cout << "Duration of insertion of emails: " << duration.count() << " seconds" << endl;
+    cout << "Duration of creation of email datasets: " << duration.count() << " seconds" << endl;
 }
