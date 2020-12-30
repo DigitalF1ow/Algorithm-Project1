@@ -6,6 +6,7 @@
 #include <chrono>
 
 #include "HashTable.cpp"
+#include "LinearProbing.cpp"
 
 using namespace std;
 
@@ -37,6 +38,19 @@ void chainingMethod()
         auto end = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::seconds>(end - start);
         cout << "Duration of insertion of email dataset A using chaining Method: " << duration.count() << " seconds" << endl;
+
+        string target;
+        cout << "target to retrieve: " << endl;
+        cin >> target;
+
+        if (ht.retrieve(target))
+        {
+            cout << "Target has been found!" << endl;
+        }
+        else
+        {
+            cout << "Target has been not been found!" << endl;
+        }
     }
     else if (choiceDataSet == 2)
     {
@@ -56,6 +70,19 @@ void chainingMethod()
         auto end = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::seconds>(end - start);
         cout << "Duration of insertion of email dataset B using chaining Method: " << duration.count() << " seconds" << endl;
+
+        string target;
+        cout << "target to retrieve: " << endl;
+        cin >> target;
+
+        if (ht.retrieve(target))
+        {
+            cout << "Target has been found!" << endl;
+        }
+        else
+        {
+            cout << "Target has been not been found!" << endl;
+        }
     }
     else if (choiceDataSet == 3)
     {
@@ -75,28 +102,76 @@ void chainingMethod()
         auto end = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::seconds>(end - start);
         cout << "Duration of insertion of email dataset C using chaining Method: " << duration.count() << " seconds" << endl;
+
+        string target;
+        cout << "target to retrieve: " << endl;
+        cin >> target;
+
+        if (ht.retrieve(target))
+        {
+            cout << "Target has been found!" << endl;
+        }
+        else
+        {
+            cout << "Target has been not been found!" << endl;
+        }
     }
     else
     {
         cout << "Error - That is an invalid choice!" << endl;
     }
+}
 
-    int target;
-    cout << "target to retrieve: " << endl;
-    cin >> target;
+void linearProbing()
+{
+    int choiceDataSet;
+    ifstream datasetEntryFile;
+    string tempString;
 
+    cout << "Which of the following data sets do you want to use?" << endl;
+    printf("1. Dataset A\n2. Dataset B\n3. Dataset C\n");
 
+    cin >> choiceDataSet;
 
-    if (ht.resize(target))
+    if (choiceDataSet == 1)
     {
-        cout << "Target has been found!" << endl;
+        auto start = std::chrono::high_resolution_clock::now();
+        string tempString;
+        HashMap<int, string> *linearHashTable = new HashMap<int, string>(150);
+        //50% more than the dataset used
+        
+        datasetEntryFile.open("EmailSetA.txt");
+        while (!datasetEntryFile.eof())
+        {
+            getline(datasetEntryFile, tempString);
+            int asciiNum = 0;
+            int index = 0;
+
+            for (int i = 0; i < tempString.length(); i++)
+            {
+                asciiNum += tempString[i]; 
+            }
+
+            linearHashTable->insert(asciiNum, tempString);
+
+            tempString = "";
+        }
+        
+        linearHashTable->displayHashMap();
+    }
+    else if (choiceDataSet == 2)
+    {
+
+    }
+    else if (choiceDataSet == 3)
+    {
+
     }
     else
     {
-        cout << "Target has been not been found!" << endl;
-        /* code */
-    }    
-
+        printf("Error - irrelevant choice of data set\n");
+    }
+    
 }
 
 int main()
@@ -113,15 +188,15 @@ int main()
     }
     else if (choice == 2)
     {
-
+        linearProbing();
     }
     else if (choice == 3)
     {
-
+        //avlBinary();
     }
     else if (choice == 4)
     {
-
+        //priorityQueue();
     }
 }
 

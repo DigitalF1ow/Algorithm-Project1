@@ -35,8 +35,9 @@ class HashTable {
 
   void insert (T newItem) {
     int location = hashfunction(newItem);
-        table[location].insertFront(newItem);
+      table[location].insertFront(newItem);
   }
+
   bool retrieve (T & target) {
     int location = hashfunction(target);
     if(!table[location].find(target))
