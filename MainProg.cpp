@@ -229,6 +229,16 @@ void linearProbing()
     
 }
 
+void avlTree()
+{
+
+}
+
+void priorityQueue()
+{
+
+}
+
 int main()
 {
     int choice;
@@ -247,7 +257,7 @@ int main()
     }
     else if (choice == 3)
     {
-        //avlBinary();
+        //avlTree();
     }
     else if (choice == 4)
     {
