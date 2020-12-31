@@ -4,7 +4,7 @@
 #include <fstream>
 #include <ctime>
 #include <chrono>
-
+#include <string>
 #include "HashTable.cpp"
 #include "LinearProbing.cpp"
 
@@ -105,7 +105,7 @@ void chainingMethod()
                 ht.insert(tempString);
             }
             datasetEntryFile.close();
-            cout << ht << endl;
+            //cout << ht << endl;
 
             auto end = std::chrono::high_resolution_clock::now();
             auto duration = std::chrono::duration_cast<std::chrono::seconds>(end - start);
@@ -176,6 +176,20 @@ void linearProbing()
 
         linearHashTable->displayHashMap();
         cout << "Duration of insertion of email dataset A using Linear Probing Method: " << duration.count() << " seconds" << endl;
+        string searchKey;
+
+        cout << "Which value do you want to search for?" << endl;
+        cin >> searchKey;
+
+        int asciiNum = 0;
+
+        for (int i = 0; i < searchKey.length(); i++)
+        {
+            asciiNum += searchKey[i]; 
+        }
+        
+        cout << "Target Found at:" << linearHashTable->get(asciiNum) << endl;
+        
     }
     else if (choiceDataSet == 2)
     {
@@ -239,7 +253,6 @@ void linearProbing()
     {
         printf("Error - irrelevant choice of data set\n");
     }
-    
 }
 
 void avlTree()

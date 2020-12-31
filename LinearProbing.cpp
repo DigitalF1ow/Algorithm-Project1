@@ -84,12 +84,17 @@ class HashMap
     }
 
     //Function to search for the value for a given key 
-    V get(string key)
+    int get(int key)
     {
         int hashIndex = hashfunction(key);
         int count = 0;
+        int arrayIndex = 0;
 
         //finding the node with the key
+        /*
+        int i;
+        while (i < size)
+        */
         while (array[hashIndex] != NULL)
         {    
             int count = 0;
@@ -98,10 +103,11 @@ class HashMap
             
             //if the node is found, return the value for a given key
             if (array[hashIndex] -> key == key)
-                return array[hashIndex] -> value;
+                return array[hashIndex] -> key;
+            
             hashIndex++;
             hashIndex %= capacity;
-        
+            
         }
 
         //If it is not found, return null
@@ -114,8 +120,10 @@ class HashMap
         {
             if(array[i] != NULL && array[i]->key != -1 && array[i]-> key != 0)
                 cout << "Index " << i << ": " << array[i] -> key << " Value = " << array[i] -> value << endl;
-        }
+            else
+                cout << "Index " << i << ": " << -1 << " Value = " << "-1" << endl;
+        }   
 
-        printf("\nNumber of Collisions detected: %d\n\n", collisions);
+        printf("\nNumber of Collisions detected: %d\nSize of Array: %d\n", collisions, size);
     }
 };
