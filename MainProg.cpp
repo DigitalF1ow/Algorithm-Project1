@@ -128,6 +128,8 @@ void linearProbing()
     ifstream datasetEntryFile;
     string tempString;
 
+    //HashMap<int,string> *linarHashTable;
+
     cout << "Which of the following data sets do you want to use?" << endl;
     printf("1. Dataset A\n2. Dataset B\n3. Dataset C\n");
 
@@ -156,16 +158,69 @@ void linearProbing()
 
             tempString = "";
         }
-        
+        auto end = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::seconds>(end - start);
+
         linearHashTable->displayHashMap();
+        cout << "Duration of insertion of email dataset A using Linear Probing Method: " << duration.count() << " seconds" << endl;
     }
     else if (choiceDataSet == 2)
     {
+        auto start = std::chrono::high_resolution_clock::now();
+        string tempString;
+        HashMap<int, string> *linearHashTable = new HashMap<int, string>(150000);
+        //50% more than the dataset used
+        
+        datasetEntryFile.open("EmailSetB.txt");
+        while (!datasetEntryFile.eof())
+        {
+            getline(datasetEntryFile, tempString);
+            int asciiNum = 0;
+            int index = 0;
 
+            for (int i = 0; i < tempString.length(); i++)
+            {
+                asciiNum += tempString[i]; 
+            }
+
+            linearHashTable->insert(asciiNum, tempString);
+
+            tempString = "";
+        }
+        auto end = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::seconds>(end - start);
+
+        linearHashTable->displayHashMap();
+        cout << "Duration of insertion of email dataset B using Linear Probing Method: " << duration.count() << " seconds" << endl;
     }
     else if (choiceDataSet == 3)
     {
+        auto start = std::chrono::high_resolution_clock::now();
+        string tempString;
+        HashMap<int, string> *linearHashTable = new HashMap<int, string>(750000);
+        //50% more than the dataset used
+        
+        datasetEntryFile.open("EmailSetC.txt");
+        while (!datasetEntryFile.eof())
+        {
+            getline(datasetEntryFile, tempString);
+            int asciiNum = 0;
+            int index = 0;
 
+            for (int i = 0; i < tempString.length(); i++)
+            {
+                asciiNum += tempString[i]; 
+            }
+
+            linearHashTable->insert(asciiNum, tempString);
+
+            tempString = "";
+        }
+        auto end = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::seconds>(end - start);
+
+        linearHashTable->displayHashMap();
+        cout << "Duration of insertion of email dataset C using Linear Probing Method: " << duration.count() << " seconds" << endl;
     }
     else
     {

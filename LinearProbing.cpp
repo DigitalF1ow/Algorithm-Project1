@@ -30,7 +30,7 @@ class HashMap
     int capacity;
     //size of Hash Tables
     int size;
-    
+    int collisions;
     //Dummy node 
     HashNode<K, V> *dummy;
 
@@ -40,6 +40,7 @@ class HashMap
         //Initialize the capacity of the hash array
         this-> capacity = capacity;
         size = 0;
+        collisions = 0;
         array = new HashNode<K, V> *[capacity];
 
         //Initialize the elements of array as NULL
@@ -59,7 +60,7 @@ class HashMap
     }
 
     //Can insert any data type of node
-    int insert(K key, V value)
+    void insert(K key, V value)
     {
         HashNode<K,V> *tempNode = new HashNode<K,V>(key, value);
 
@@ -68,10 +69,10 @@ class HashMap
 
         //Finding next free space
         while(array[hashIndex] != NULL && array[hashIndex] -> key != -1)
-        {
+        {   
+            collisions++;
             hashIndex++;
             hashIndex %= capacity;
-            cout << "Theres a collision" << endl;
         }
 
         //if a new node is inserted, increase the size, based from the constructor made
@@ -114,5 +115,7 @@ class HashMap
             if(array[i] != NULL && array[i]->key != -1)
                 cout << "Index " << i << ": " << array[i] -> key << " Value = " << array[i] -> value << endl;
         }
+
+        printf("Number of Collisions detected: %d\n\n", collisions);
     }
 };
