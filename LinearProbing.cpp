@@ -112,10 +112,10 @@ class HashMap
     {
         for (int i = 0; i < capacity; i++)
         {
-            if(array[i] != NULL && array[i]->key != -1)
+            if(array[i] != NULL && array[i]->key != -1 && array[i]-> key != 0)
                 cout << "Index " << i << ": " << array[i] -> key << " Value = " << array[i] -> value << endl;
         }
 
-        printf("Number of Collisions detected: %d\n\n", collisions);
+        printf("\nNumber of Collisions detected: %d\n\n", collisions);
     }
 };
