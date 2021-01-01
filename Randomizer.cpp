@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void main()
+int main()
 {
     cout << "Hello World" << endl;
     cout << "We are going to randomize the emails into each of the following formats:" << endl;
@@ -24,12 +24,12 @@ void main()
     string *setCEmail  = new string[sizeC];
 
     cout << sizeA << endl;
-    
+
     //Create a loop for the number of letters
-    
+
     string generatedEmail;
     srand(time(NULL));
-    
+
     //Creating a loop to insert the randomly generated emails into the txt file - coming soon
     auto start = std::chrono::high_resolution_clock::now();
 
@@ -41,12 +41,12 @@ void main()
         }
 
         generatedEmail += ".";
-        
+
         for (int i = 0; i < 4; i++)
         {
             generatedEmail += alphanum[rand() %(sizeof(alphanum) - 1)];
         }
-        
+
         generatedEmail += "@";
 
         for (int i = 0; i < 5; i++)
@@ -87,7 +87,7 @@ void main()
     writerFile.close();
     cout << "Creating a set of emails for Set B" << endl;
     writerFile.open("EmailSetB.txt");
-    
+
     for (int i = 0; i < sizeB; i++)
     {
         writerFile << setBEmail[i].c_str() << endl;

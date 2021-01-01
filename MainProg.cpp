@@ -5,9 +5,14 @@
 #include <chrono>
 #include <string>
 #include "HashTable.cpp"
+<<<<<<< Updated upstream
 //#include "LinearProbing.cpp"
 
+=======
+#include "Bstinsertion.cpp"
+>>>>>>> Stashed changes
 using namespace std;
+
 
 void chainingMethod()
 {
@@ -23,6 +28,12 @@ void chainingMethod()
     int choiceDataSet;
     string searchString;
     ifstream datasetEntryFile;
+<<<<<<< Updated upstream
+=======
+
+    cout << "Which of the following datasets you would like to use?" << endl;
+    printf("1. Dataset A\n2. Dataset B\n3. Dataset C\n");
+>>>>>>> Stashed changes
 
     int choiceSelection;
     cout << "----------------------------------------" << endl;
@@ -493,6 +504,7 @@ void linearProbing()
             cout << "Please enter a valid option" << endl;
         }
     }
+<<<<<<< Updated upstream
 }
 
 void avlTree()
@@ -502,9 +514,100 @@ void avlTree()
 
 void priorityQueue()
 {
+=======
+
+>>>>>>> Stashed changes
 
 }
+/*
+void avlBst()
+{
+    int choiceDataSet;
 
+    cout << "Which of the following datasets you would like to use?" << endl;
+    printf("1. Dataset A\n2. Dataset B\n3. Dataset C\n");
+
+    cin >> choiceDataSet;
+
+	ifstream readFile;
+	string tempString;
+
+	Node *root = NULL;
+    if (choiceDataSet == 1)
+    {
+        readFile.open("EmailsetA.txt");
+    }
+    else if (choiceDataSet == 2)
+    {
+        readFile.open("EmailsetB.txt");
+    }
+    else if (choiceDataSet == 3)
+    {
+        readFile.open("EmailsetC.txt");
+    }
+    else
+    {
+        cout << "Error - That is an invalid choice!" << endl;
+    }
+
+    auto iStart = std::chrono::system_clock::now();
+
+    while (getline (readFile, tempString))
+	{
+		root = insert(root, tempString);
+	}
+
+    auto iEnd = std::chrono::system_clock::now();
+	chrono::duration<double> iDuration = iEnd - iStart;
+	cout<<"Insert Time: ";
+	cout<<iDuration.count()<<"\n";
+    //preOrder(root);
+	string word;
+	cout<<"Enter email be searched\n";
+	cin>>word;
+
+	auto sStart = std::chrono::system_clock::now();
+
+	if(Search(root,word) == true)
+        cout<<"Found\n";
+	else
+        cout<<"Not Found\n";
+
+	auto sEnd = std::chrono::system_clock::now();
+	chrono::duration<double> sDuration = sEnd - sStart;
+	cout<<"Search Time: ";
+	cout<<sDuration.count()<<"\n";
+
+    readFile.close();
+
+    /*while(!openFile.eof()) // Getting all the lines from the file
+    {
+        getline(openFile, tempString); //saves the line in temporary
+        //cout << tempString << endl;
+        root = insert(root, tempString);
+    }*/
+
+    /*
+	root = insert(root, 10);
+	root = insert(root, am);
+	root = insert(root, 20);
+	root = insert(root, 30);
+	root = insert(root, 40);
+	root = insert(root, 50);*/
+
+	/* The constructed AVL Tree would be
+				30
+			/ \
+			20 40
+			/ \ \
+		10 25 50
+
+	cout << "Preorder traversal of the "
+			"constructed AVL tree is \n";
+	preOrder(root);
+
+}
+*/
 int main()
 {
     int choice;
@@ -513,6 +616,7 @@ int main()
     HashTable
     */
 
+<<<<<<< Updated upstream
 
     while(true)
     {
@@ -548,6 +652,22 @@ int main()
             default:
                 cout << "Please choose the valid option" << endl;
         }
+=======
+    if (choice == 1)
+    {
+        chainingMethod();
+    }
+    else if (choice == 2)
+    {
+    }
+    else if (choice == 3)
+    {
+        //avlBst();
+    }
+    else if (choice == 4)
+    {
+
+>>>>>>> Stashed changes
     }
     return 0;
     
