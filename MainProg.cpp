@@ -139,10 +139,27 @@ void linearProbing()
     {
         auto start = std::chrono::high_resolution_clock::now();
         string tempString;
-        HashMap<int, string> *linearHashTable = new HashMap<int, string>(150);
+        HashMap<int, string> *linearHashTable = new HashMap<int, string>(30);
         //50% more than the dataset used
         
-        datasetEntryFile.open("EmailSetA.txt");
+        //datasetEntryFile.open("EmailSetA.txt");
+        string a[4] = {"Ept3q.uJSz@ParvO.org","GAfdY.JzBp@XCrxA.org","ZBlSN.A87h@RZyZM.org","70HJS.JqxP@kHPxL.com"};
+
+        for(int i  = 0; i < 4; i++)
+        {
+            int asciiNum = 0;
+            int index = 0;
+
+            for (int j = 0; j < a[i].length(); j++)
+            {
+                asciiNum += a[i][j]; 
+            }
+
+            linearHashTable->insert(asciiNum, a[i]);
+        }
+        linearHashTable->displayHashMap();
+
+        /*
         while (!datasetEntryFile.eof())
         {
             getline(datasetEntryFile, tempString);
@@ -163,6 +180,7 @@ void linearProbing()
 
         linearHashTable->displayHashMap();
         cout << "Duration of insertion of email dataset A using Linear Probing Method: " << duration.count() << " seconds" << endl;
+        */
     }
     else if (choiceDataSet == 2)
     {
