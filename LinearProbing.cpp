@@ -74,8 +74,8 @@ class HashMap
             hashIndex++;
             hashIndex %= capacity;
         }
-
-        //if a new node is inserted, increase the size, based from the constructor made
+        
+        //if a new node is inserted, increase the size, based from the constructor made -- Maybe need? Capacity got though
         if (array[hashIndex] == NULL || array[hashIndex]->key  == -1)
         {
             size++;
@@ -83,8 +83,10 @@ class HashMap
         array[hashIndex] = tempNode;
     }
 
-    //Function to search for the value for a given key 
-    V get(string key)
+    //Function to search for the value for a given key. 
+    //needs to be converted to a ascii value before calling function
+    //Returns true or false
+    bool get(int key)
     {
         int hashIndex = hashfunction(key);
         int count = 0;
@@ -94,18 +96,38 @@ class HashMap
         {    
             int count = 0;
             if (count++ > capacity) //avoiding infinite looping
-                return NULL;
+                return false;
             
             //if the node is found, return the value for a given key
             if (array[hashIndex] -> key == key)
-                return array[hashIndex] -> value;
+                return true;
             hashIndex++;
             hashIndex %= capacity;
         
         }
 
         //If it is not found, return null
-        return NULL;
+        return false;
+    }
+
+    //Gets the index of where the key is. Does not affect the time taken if put the main program correctly
+    //Returns Integer, Only used it when you found the key oredy
+    int getIndex(int key)
+    {   
+        int hashIndex = hashfunction(key);
+
+        //finding the node with the key
+        while (array[hashIndex] != NULL)
+        {                
+            //if the node is found, return the value for a given key
+            if (array[hashIndex] -> key == key)
+                return hashIndex;
+            hashIndex++;
+            hashIndex %= capacity;
+        }
+
+        //If it is not found, return 0
+        return 0;
     }
 
     void displayHashMap()
@@ -113,7 +135,9 @@ class HashMap
         for (int i = 0; i < capacity; i++)
         {
             if(array[i] != NULL && array[i]->key != -1 && array[i]-> key != 0)
-                cout << "Index " << i << ": " << array[i] -> key << " Value = " << array[i] -> value << endl;
+                cout << i << " = " << array[i] -> value << endl;
+            
+            
         }
 
         printf("\nNumber of Collisions detected: %d\n\n", collisions);

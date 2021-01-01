@@ -137,6 +137,7 @@ void linearProbing()
 
     if (choiceDataSet == 1)
     {
+        /*
         auto start = std::chrono::high_resolution_clock::now();
         string tempString;
         HashMap<int, string> *linearHashTable = new HashMap<int, string>(30);
@@ -159,7 +160,41 @@ void linearProbing()
         }
         linearHashTable->displayHashMap();
 
-        /*
+        string target;
+        while(true)
+        {
+            cout << "target to retrieve, type 0 to exit searching: " << endl;
+            cin >> target;
+
+            int asciiNum = 0;
+            int index = 0;
+
+            for (int j = 0; j < target.length(); j++)
+            {
+                asciiNum += target[j]; 
+            }
+            
+            if(asciiNum == 0)
+            {
+                break;
+            }
+            else if (linearHashTable->get(asciiNum))
+            {
+                cout << "Target has been found at index " << linearHashTable->getIndex(asciiNum) << endl;
+            }
+            else if (!(linearHashTable->get(asciiNum)))
+            {
+                cout << "Target has been not been found!" << endl;
+            }
+        }
+        */
+        auto start = std::chrono::high_resolution_clock::now();
+        string tempString;
+        HashMap<int, string> *linearHashTable = new HashMap<int, string>(150);
+        //50% more than the dataset used
+        
+        datasetEntryFile.open("SetA.txt");
+        
         while (!datasetEntryFile.eof())
         {
             getline(datasetEntryFile, tempString);
@@ -180,7 +215,36 @@ void linearProbing()
 
         linearHashTable->displayHashMap();
         cout << "Duration of insertion of email dataset A using Linear Probing Method: " << duration.count() << " seconds" << endl;
-        */
+        cout << "Size of HashMap: " << linearHashTable->getSize() << " indexes" << endl;
+
+        string target;
+        while(true)
+        {
+            cout << "target to retrieve, type 0 to exit searching: " << endl;
+            cin >> target;
+
+            int asciiNum = 0;
+            int index = 0;
+
+            for (int j = 0; j < target.length(); j++)
+            {
+                asciiNum += target[j]; 
+            }
+            
+            if(asciiNum == 0)
+            {
+                break;
+            }
+            else if (linearHashTable->get(asciiNum))
+            {
+                cout << "Target has been found at index " << linearHashTable->getIndex(asciiNum, target) << endl;
+            }
+            else if (!(linearHashTable->get(asciiNum)))
+            {
+                cout << "Target has been not been found!" << endl;
+            }
+        }
+        
     }
     else if (choiceDataSet == 2)
     {
@@ -259,6 +323,7 @@ void priorityQueue()
 
 int main()
 {
+    system("cls");
     int choice;
     cout << "Welcome to the program. Which type of algorithm do you want to set on?" << endl;
     printf("1. Chaining Method\n2. Linear Probing\n3. AVL Binary Search Tree\n4. Priority Queue using Heap\n");
