@@ -19,25 +19,68 @@ class HashTable {
     
     return index;
   }
+  //Public Constructor
  public:
   HashTable (int size) {
     table.resize (size); // resize vector to support size elements.
   }
+  //Destructor
   ~HashTable() {
     for (int i = 0; i < table.size(); i++)
       table[i].makeEmpty();
   }
 
+  //Getting the size of the hash table
   int size() 
   {
     return table.size();
   }
 
+  void clear()
+  {
+    table.clear();
+  }
+
+  void resize(int intResize)
+  {
+    table.resize(intResize);
+  }
+
+  //Insert a new key into the hash table using Chaining Method
   void insert (T newItem) {
     int location = hashfunction(newItem);
       table[location].insertFront(newItem);
   }
 
+//Insert a new key into hash table using Linear Probing
+  void insertLinearProbe(T newItem) 
+  {
+    int location = hashfunction(newItem);
+
+    //Loop till there is a empty index for the node
+    while(true)
+    {
+      if(table[location].isEmpty())
+      {
+        table[location].insertFront(newItem);
+        break;
+      }
+      else if(table[location].isEmpty() == false)
+      {
+        if(location < table.size())
+        {
+          location = location + 1;
+        }
+        else
+        {
+          break;
+        }
+        
+      }
+    }
+  }
+
+  //Getting the key from the hashtable
   bool retrieve (T & target) {
     int location = hashfunction(target);
     if(!table[location].find(target))

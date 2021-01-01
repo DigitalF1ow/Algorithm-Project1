@@ -24,10 +24,11 @@ class HashNode
 
 template <typename K, typename V>
 //HashMap
-class HashMap 
+class HashMap
 {
     HashNode<K, V> **array;
     int capacity;
+
     //size of Hash Tables
     int size;
     int collisions;
@@ -41,6 +42,8 @@ class HashMap
         this-> capacity = capacity;
         size = 0;
         collisions = 0;
+        
+        //Points to multiple hashnodes
         array = new HashNode<K, V> *[capacity];
 
         //Initialize the elements of array as NULL
@@ -90,11 +93,6 @@ class HashMap
         int count = 0;
         int arrayIndex = 0;
 
-        //finding the node with the key
-        /*
-        int i;
-        while (i < size)
-        */
         while (array[hashIndex] != NULL)
         {    
             int count = 0;
