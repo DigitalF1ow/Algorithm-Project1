@@ -190,10 +190,10 @@ void linearProbing()
         */
         auto start = std::chrono::high_resolution_clock::now();
         string tempString;
-        HashMap<int, string> *linearHashTable = new HashMap<int, string>(150);
+        HashMap<int, string> *linearHashTable = new HashMap<int, string>(150001);
         //50% more than the dataset used
         
-        datasetEntryFile.open("SetA.txt");
+        datasetEntryFile.open("EmailSetB.txt");
         
         while (!datasetEntryFile.eof())
         {
@@ -215,7 +215,7 @@ void linearProbing()
 
         linearHashTable->displayHashMap();
         cout << "Duration of insertion of email dataset A using Linear Probing Method: " << duration.count() << " seconds" << endl;
-        cout << "Size of HashMap: " << linearHashTable->getSize() << " indexes" << endl;
+        //cout << "Size of HashMap: " << linearHashTable->getSize() << " indexes" << endl;
 
         string target;
         while(true)
@@ -237,7 +237,7 @@ void linearProbing()
             }
             else if (linearHashTable->get(asciiNum))
             {
-                cout << "Target has been found at index " << linearHashTable->getIndex(asciiNum, target) << endl;
+                cout << "Target has been found at index " << linearHashTable->getIndex(asciiNum) << endl;
             }
             else if (!(linearHashTable->get(asciiNum)))
             {
