@@ -4,13 +4,11 @@
 #include <ctime>
 #include <chrono>
 #include <string>
-#include "HashTable.cpp"
-<<<<<<< Updated upstream
-//#include "LinearProbing.cpp"
 
-=======
-#include "Bstinsertion.cpp"
->>>>>>> Stashed changes
+//Files linked
+#include "HashTable.cpp"
+#include "LinearProbing.cpp"
+
 using namespace std;
 
 
@@ -28,12 +26,6 @@ void chainingMethod()
     int choiceDataSet;
     string searchString;
     ifstream datasetEntryFile;
-<<<<<<< Updated upstream
-=======
-
-    cout << "Which of the following datasets you would like to use?" << endl;
-    printf("1. Dataset A\n2. Dataset B\n3. Dataset C\n");
->>>>>>> Stashed changes
 
     int choiceSelection;
     cout << "----------------------------------------" << endl;
@@ -293,7 +285,9 @@ void linearProbing()
     {
         case 1:
         {
-            HashTable<string> ht(150);
+            //HashTable<string> ht(150);
+            HashMap<int, string> *linearHashTable = new HashMap<int, string>(151);
+            //Might need to clear the hashmap elements
             while(true)
             {
                 cout << "Which option do you want to do?" << endl;
@@ -306,46 +300,65 @@ void linearProbing()
                     cin.ignore();
                     printf("Choice:");
                     cin >> choiceSelection;
-                    
                 }
 
                 if(choiceSelection == 1)
                 {
-                    ht.clear();
-                    ht.resize(150);
+                    //linearHashTable->clear();
                     auto start = std::chrono::high_resolution_clock::now();
                     string tempString;
                     
-                    datasetEntryFile.open("EmailsetA.txt");
-                    while(!datasetEntryFile.eof()) // Getting all the lines from the file
+                    //50% more than the dataset used
+                    
+                    datasetEntryFile.open("EmailSetA.txt");
+                    
+                    while (!datasetEntryFile.eof())
                     {
-                        getline(datasetEntryFile, tempString); //saves the line in temporary
-                        //cout << tempString << endl;
-                        ht.insertLinearProbe(tempString);
-                    }
-                    datasetEntryFile.close();
-                    auto end = std::chrono::high_resolution_clock::now();
-                    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+                        getline(datasetEntryFile, tempString);
+                        int asciiNum = 0;
+                        int index = 0;
 
-                    cout << ht << endl;
-                    cout << "Duration of insertion of email dataset A using chaining Method: " << duration.count() << " seconds" << endl;
+                        for (int i = 0; i < tempString.length(); i++)
+                        {
+                            asciiNum += tempString[i]; 
+                        }
+
+                        linearHashTable->insert(asciiNum, tempString);
+
+                        tempString = "";
+                    }
+                    auto end = std::chrono::high_resolution_clock::now();
+                    auto duration = std::chrono::duration_cast<std::chrono::seconds>(end - start);
+
+                    linearHashTable->displayHashMap();
+                    cout << "Duration of insertion of email dataset A using Linear Probing Method: " << duration.count() << " seconds" << endl;
                 }
-                else if (choiceSelection == 2 && ht.size() != 0)
+                else if (choiceSelection == 2)
                 {
                     string target;
                     while(true)
                     {
                         cout << "target to retrieve, type 0 to exit searching: " << endl;
                         cin >> target;
+
                         if(target == "0")
                         {
                             break;
                         }
-                        else if (ht.retrieve(target))
+
+                        int asciiNum = 0;
+                        int index = 0;
+
+                        for (int j = 0; j < target.length(); j++)
                         {
-                            cout << "Target has been found!" << endl;
+                            asciiNum += target[j]; 
                         }
-                        else if (!(ht.retrieve(target)))
+                        
+                        if (linearHashTable->get(asciiNum))
+                        {
+                            cout << "Target has been found at index " << linearHashTable->getIndex(asciiNum) << endl;
+                        }
+                        else if (!(linearHashTable->get(asciiNum)))
                         {
                             cout << "Target has been not been found!" << endl;
                         }
@@ -361,7 +374,8 @@ void linearProbing()
         }
         case 2:
         {
-            HashTable<string> ht(150000);
+            //HashTable<string> ht(150000);
+            HashMap<int, string> *linearHashTable = new HashMap<int, string>(150001);
             while(true)
             {
                 cout << "Which option do you want to do?" << endl;
@@ -374,47 +388,65 @@ void linearProbing()
                     cin.ignore();
                     printf("Choice:");
                     cin >> choiceSelection;
-                    
                 }
 
                 if(choiceSelection == 1)
                 {
-                    ht.clear();
-                    ht.resize(150000);
-
+                    //linearHashTable->clear();
                     auto start = std::chrono::high_resolution_clock::now();
                     string tempString;
                     
-                    datasetEntryFile.open("EmailsetB.txt");
-                    while(!datasetEntryFile.eof()) // Getting all the lines from the file
+                    //50% more than the dataset used
+                    
+                    datasetEntryFile.open("EmailSetB.txt");
+                    
+                    while (!datasetEntryFile.eof())
                     {
-                        getline(datasetEntryFile, tempString); //saves the line in temporary
-                        //cout << tempString << endl;
-                        ht.insertLinearProbe(tempString);
-                    }
-                    datasetEntryFile.close();
-                    auto end = std::chrono::high_resolution_clock::now();
-                    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+                        getline(datasetEntryFile, tempString);
+                        int asciiNum = 0;
+                        int index = 0;
 
-                    cout << ht << endl;
-                    cout << "Duration of insertion of email dataset B using chaining Method: " << duration.count() << " seconds" << endl;
+                        for (int i = 0; i < tempString.length(); i++)
+                        {
+                            asciiNum += tempString[i]; 
+                        }
+
+                        linearHashTable->insert(asciiNum, tempString);
+
+                        tempString = "";
+                    }
+                    auto end = std::chrono::high_resolution_clock::now();
+                    auto duration = std::chrono::duration_cast<std::chrono::seconds>(end - start);
+
+                    linearHashTable->displayHashMap();
+                    cout << "Duration of insertion of email dataset A using Linear Probing Method: " << duration.count() << " seconds" << endl;
                 }
-                else if (choiceSelection == 2 && ht.size() != 0)
+                else if (choiceSelection == 2)
                 {
                     string target;
                     while(true)
                     {
                         cout << "target to retrieve, type 0 to exit searching: " << endl;
                         cin >> target;
+
                         if(target == "0")
                         {
                             break;
                         }
-                        else if (ht.retrieve(target))
+
+                        int asciiNum = 0;
+                        int index = 0;
+
+                        for (int j = 0; j < target.length(); j++)
                         {
-                            cout << "Target has been found!" << endl;
+                            asciiNum += target[j]; 
                         }
-                        else if (!(ht.retrieve(target)))
+                        
+                        if (linearHashTable->get(asciiNum))
+                        {
+                            cout << "Target has been found at index " << linearHashTable->getIndex(asciiNum) << endl;
+                        }
+                        else if (!(linearHashTable->get(asciiNum)))
                         {
                             cout << "Target has been not been found!" << endl;
                         }
@@ -430,7 +462,8 @@ void linearProbing()
         }
         case 3:
         {
-            HashTable<string> ht(750000);
+            //HashTable<string> ht(750000);
+            HashMap<int, string> *linearHashTable = new HashMap<int, string>(750001);
             while(true)
             {
                 cout << "Which option do you want to do?" << endl;
@@ -443,53 +476,69 @@ void linearProbing()
                     cin.ignore();
                     printf("Choice:");
                     cin >> choiceSelection;
-                    
                 }
 
                 if(choiceSelection == 1)
                 {
-                    ht.clear();
-                    ht.resize(750000);
-
+                    //linearHashTable->clear();
                     auto start = std::chrono::high_resolution_clock::now();
                     string tempString;
                     
-                    datasetEntryFile.open("EmailsetC.txt");
-                    while(!datasetEntryFile.eof()) // Getting all the lines from the file
+                    //50% more than the dataset used
+                    
+                    datasetEntryFile.open("EmailSetC.txt");
+                    
+                    while (!datasetEntryFile.eof())
                     {
-                        getline(datasetEntryFile, tempString); //saves the line in temporary
-                        //cout << tempString << endl;
-                        ht.insertLinearProbe(tempString);
+                        getline(datasetEntryFile, tempString);
+                        int asciiNum = 0;
+                        int index = 0;
+
+                        for (int i = 0; i < tempString.length(); i++)
+                        {
+                            asciiNum += tempString[i]; 
+                        }
+
+                        linearHashTable->insert(asciiNum, tempString);
+
+                        tempString = "";
                     }
-                    datasetEntryFile.close();
-
                     auto end = std::chrono::high_resolution_clock::now();
-                    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+                    auto duration = std::chrono::duration_cast<std::chrono::seconds>(end - start);
 
-                    cout << ht << endl;
-                    cout << "Duration of insertion of email dataset C using chaining Method: " << duration.count() << " seconds" << endl;
+                    linearHashTable->displayHashMap();
+                    cout << "Duration of insertion of email dataset A using Linear Probing Method: " << duration.count() << " seconds" << endl;
                 }
-                else if (choiceSelection == 2 && ht.size() != 0)
+                else if (choiceSelection == 2)
                 {
                     string target;
                     while(true)
                     {
                         cout << "target to retrieve, type 0 to exit searching: " << endl;
                         cin >> target;
+
                         if(target == "0")
                         {
                             break;
                         }
-                        else if (ht.retrieve(target))
+
+                        int asciiNum = 0;
+                        int index = 0;
+
+                        for (int j = 0; j < target.length(); j++)
                         {
-                            cout << "Target has been found!" << endl;
+                            asciiNum += target[j]; 
                         }
-                        else if (!(ht.retrieve(target)))
+                        
+                        if (linearHashTable->get(asciiNum))
+                        {
+                            cout << "Target has been found at index " << linearHashTable->getIndex(asciiNum) << endl;
+                        }
+                        else if (!(linearHashTable->get(asciiNum)))
                         {
                             cout << "Target has been not been found!" << endl;
                         }
                     }
-                    
                 }
                 else if (choiceSelection == 3)
                 {
@@ -504,7 +553,6 @@ void linearProbing()
             cout << "Please enter a valid option" << endl;
         }
     }
-<<<<<<< Updated upstream
 }
 
 void avlTree()
@@ -514,9 +562,6 @@ void avlTree()
 
 void priorityQueue()
 {
-=======
-
->>>>>>> Stashed changes
 
 }
 /*
@@ -616,7 +661,6 @@ int main()
     HashTable
     */
 
-<<<<<<< Updated upstream
 
     while(true)
     {
@@ -652,22 +696,6 @@ int main()
             default:
                 cout << "Please choose the valid option" << endl;
         }
-=======
-    if (choice == 1)
-    {
-        chainingMethod();
-    }
-    else if (choice == 2)
-    {
-    }
-    else if (choice == 3)
-    {
-        //avlBst();
-    }
-    else if (choice == 4)
-    {
-
->>>>>>> Stashed changes
     }
     return 0;
     
