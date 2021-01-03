@@ -29,9 +29,9 @@ void chainingMethod()
     ifstream datasetEntryFile;
 
     int choiceSelection;
-    cout << "----------------------------------------" << endl;
+    cout << "----------------------------------------------" << endl;
     printf("\t Chaining Method \t\n");
-    cout << "----------------------------------------" << endl;
+    cout << "----------------------------------------------" << endl;
 
     cout << "What dataset would you want to choose?" << endl;
     printf("1. Dataset A\n2. Dataset B\n3. Dataset C\nChoice: ");
@@ -53,9 +53,9 @@ void chainingMethod()
             HashTable<string> ht(90);
             while(true)
             {
-                cout << "----------------------------------------" << endl;
+                cout << "----------------------------------------------" << endl;
                 printf("\t Chaining Method - Dataset A \t\n");
-                cout << "----------------------------------------" << endl;
+                cout << "----------------------------------------------" << endl;
 
                 cout << "Which option do you want to do?" << endl;
                 printf("1. Insertion - Finding time taken\n2. Search\n3. Exit Chaining Method\nChoice: ");
@@ -128,9 +128,9 @@ void chainingMethod()
             HashTable<string> ht(90000);
             while(true)
             {
-                cout << "----------------------------------------" << endl;
+                cout << "----------------------------------------------" << endl;
                 printf("\t Chaining Method - Dataset B \t\n");
-                cout << "----------------------------------------" << endl;
+                cout << "----------------------------------------------" << endl;
 
                 cout << "Which option do you want to do?" << endl;
                 printf("1. Insertion - Finding time taken\n2. Search\n3. Exit Chaining Method\nChoice: ");
@@ -203,9 +203,9 @@ void chainingMethod()
             HashTable<string> ht(450000);
             while(true)
             {
-                cout << "----------------------------------------" << endl;
+                cout << "----------------------------------------------" << endl;
                 printf("\t Chaining Method - Dataset C \t\n");
-                cout << "----------------------------------------" << endl;
+                cout << "----------------------------------------------" << endl;
 
                 cout << "Which option do you want to do?" << endl;
                 printf("1. Insertion - Finding time taken\n2. Search\n3. Exit Chaining Method\nChoice: ");
@@ -288,9 +288,9 @@ void linearProbing()
     ifstream datasetEntryFile;
 
     int choiceSelection;
-    cout << "----------------------------------------" << endl;
+    cout << "----------------------------------------------" << endl;
     printf("\t Linear Probing \t\n");
-    cout << "----------------------------------------" << endl;
+    cout << "----------------------------------------------" << endl;
 
     cout << "What dataset would you want to choose?" << endl;
     printf("1. Dataset A\n2. Dataset B\n3. Dataset C\nChoice: ");
@@ -315,9 +315,9 @@ void linearProbing()
             //Might need to clear the hashmap elements
             while(true)
             {
-                cout << "----------------------------------------" << endl;
+                cout << "----------------------------------------------" << endl;
                 printf("\t Linear Probing - Dataset A \t\n");
-                cout << "----------------------------------------" << endl;
+                cout << "----------------------------------------------" << endl;
 
                 cout << "Which option do you want to do?" << endl;
                 printf("1. Insertion - Finding time taken\n2. Search\n3. Exit Chaining Method\nChoice: ");
@@ -412,9 +412,9 @@ void linearProbing()
             HashMap<int, string> *linearHashTable = new HashMap<int, string>(150001);
             while(true)
             {
-                cout << "----------------------------------------" << endl;
+                cout << "----------------------------------------------" << endl;
                 printf("\t Linear Probing - Dataset B \t\n");
-                cout << "----------------------------------------" << endl;
+                cout << "----------------------------------------------" << endl;
 
                 cout << "Which option do you want to do?" << endl;
                 printf("1. Insertion - Finding time taken\n2. Search\n3. Exit Chaining Method\nChoice: ");
@@ -508,9 +508,9 @@ void linearProbing()
             HashMap<int, string> *linearHashTable = new HashMap<int, string>(750001);
             while(true)
             {
-                cout << "----------------------------------------" << endl;
+                cout << "----------------------------------------------" << endl;
                 printf("\t Linear Probing - Dataset C \t\n");
-                cout << "----------------------------------------" << endl;
+                cout << "----------------------------------------------" << endl;
 
                 cout << "Which option do you want to do?" << endl;
                 printf("1. Insertion - Finding time taken\n2. Search\n3. Exit Chaining Method\nChoice: ");

@@ -149,8 +149,8 @@ class HashMap
 
     void displayHashMap()
     {
-        ofstream file;
-        file.open("output.txt");
+        //ofstream file;
+        //file.open("output.txt");
         for (int i = 0; i < capacity; i++)
         {
             if(array[i] != NULL && array[i]->key != -1 && array[i]-> key != 0)
@@ -159,7 +159,7 @@ class HashMap
                 file << (array[i] -> value).c_str() << endl;
             }            
         }
-        file.close();
+        //file.close();
 
         printf("\nNumber of Collisions detected: %d\n\n", collisions);
     }
