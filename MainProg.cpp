@@ -49,9 +49,14 @@ void chainingMethod()
     {
         case 1:
         {
+            system("cls");
             HashTable<string> ht(90);
             while(true)
             {
+                cout << "----------------------------------------" << endl;
+                printf("\t Chaining Method - Dataset A \t\n");
+                cout << "----------------------------------------" << endl;
+
                 cout << "Which option do you want to do?" << endl;
                 printf("1. Insertion - Finding time taken\n2. Search\n3. Exit Chaining Method\nChoice: ");
                 cin >> choiceSelection;
@@ -119,9 +124,14 @@ void chainingMethod()
         }
         case 2:
         {
+            system("cls");
             HashTable<string> ht(90000);
             while(true)
             {
+                cout << "----------------------------------------" << endl;
+                printf("\t Chaining Method - Dataset B \t\n");
+                cout << "----------------------------------------" << endl;
+
                 cout << "Which option do you want to do?" << endl;
                 printf("1. Insertion - Finding time taken\n2. Search\n3. Exit Chaining Method\nChoice: ");
                 cin >> choiceSelection;
@@ -189,9 +199,14 @@ void chainingMethod()
         }
         case 3:
         {
+            system("cls");
             HashTable<string> ht(450000);
             while(true)
             {
+                cout << "----------------------------------------" << endl;
+                printf("\t Chaining Method - Dataset C \t\n");
+                cout << "----------------------------------------" << endl;
+
                 cout << "Which option do you want to do?" << endl;
                 printf("1. Insertion - Finding time taken\n2. Search\n3. Exit Chaining Method\nChoice: ");
                 cin >> choiceSelection;
@@ -293,12 +308,17 @@ void linearProbing()
     {
         case 1:
         {
+            system("cls");
+
             //HashTable<string> ht(150);
             HashMap<int, string> *linearHashTable = new HashMap<int, string>(151);
             //Might need to clear the hashmap elements
             while(true)
             {
-                
+                cout << "----------------------------------------" << endl;
+                printf("\t Linear Probing - Dataset A \t\n");
+                cout << "----------------------------------------" << endl;
+
                 cout << "Which option do you want to do?" << endl;
                 printf("1. Insertion - Finding time taken\n2. Search\n3. Exit Chaining Method\nChoice: ");
                 cin >> choiceSelection;
@@ -386,10 +406,16 @@ void linearProbing()
         }
         case 2:
         {
+            system("cls");
+
             //HashTable<string> ht(150000);
             HashMap<int, string> *linearHashTable = new HashMap<int, string>(150001);
             while(true)
             {
+                cout << "----------------------------------------" << endl;
+                printf("\t Linear Probing - Dataset B \t\n");
+                cout << "----------------------------------------" << endl;
+
                 cout << "Which option do you want to do?" << endl;
                 printf("1. Insertion - Finding time taken\n2. Search\n3. Exit Chaining Method\nChoice: ");
                 cin >> choiceSelection;
@@ -477,10 +503,15 @@ void linearProbing()
         }
         case 3:
         {
+            system("cls");
             //HashTable<string> ht(750000);
             HashMap<int, string> *linearHashTable = new HashMap<int, string>(750001);
             while(true)
             {
+                cout << "----------------------------------------" << endl;
+                printf("\t Linear Probing - Dataset C \t\n");
+                cout << "----------------------------------------" << endl;
+
                 cout << "Which option do you want to do?" << endl;
                 printf("1. Insertion - Finding time taken\n2. Search\n3. Exit Chaining Method\nChoice: ");
                 cin >> choiceSelection;
