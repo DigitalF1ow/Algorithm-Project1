@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -65,7 +66,9 @@ class HashMap
         for(int i=0 ; i < capacity ; i++)
             array[i] = NULL;
 
-        dummy = new HashNode<K,V> (-1,"");
+        //dummy = new HashNode<K,V> (-1,"");
+        collisions = 0;
+        size = 0;
     }
 
     //Can insert any data type of node
@@ -146,13 +149,17 @@ class HashMap
 
     void displayHashMap()
     {
+        ofstream file;
+        file.open("output.txt");
         for (int i = 0; i < capacity; i++)
         {
             if(array[i] != NULL && array[i]->key != -1 && array[i]-> key != 0)
+            {
                 cout << i << " = " << array[i] -> value << endl;
-            
-            
+                file << (array[i] -> value).c_str() << endl;
+            }            
         }
+        file.close();
 
         printf("\nNumber of Collisions detected: %d\n\n", collisions);
     }

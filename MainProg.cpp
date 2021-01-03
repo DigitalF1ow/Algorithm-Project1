@@ -14,6 +14,7 @@ using namespace std;
 
 void chainingMethod()
 {
+    system("cls");
     /*
     1. User selects a choice for which dataset tey want to test out
     2. User can choose if they want to select whether will it be a search or a Insertion
@@ -68,6 +69,8 @@ void chainingMethod()
                 {
                     ht.clear();
                     ht.resize(90);
+                    system("cls");
+                    cout << "This will take a while, please wait for a moment.\n" << endl;
                     auto start = std::chrono::high_resolution_clock::now();
                     string tempString;
                     
@@ -136,6 +139,8 @@ void chainingMethod()
                 {
                     ht.clear();
                     ht.resize(90000);
+                    system("cls");
+                    cout << "This will take a while, please wait for a moment.\n" << endl;
                     auto start = std::chrono::high_resolution_clock::now();
                     string tempString;
                     
@@ -204,6 +209,8 @@ void chainingMethod()
                 {
                     ht.clear();
                     ht.resize(450000);
+                    system("cls");
+                    cout << "This will take a while, please wait for a moment.\n" << endl;
                     auto start = std::chrono::high_resolution_clock::now();
                     string tempString;
                     
@@ -260,6 +267,7 @@ void chainingMethod()
 
 void linearProbing()
 {
+    system("cls");
     int choiceDataSet;
     string searchString;
     ifstream datasetEntryFile;
@@ -290,6 +298,7 @@ void linearProbing()
             //Might need to clear the hashmap elements
             while(true)
             {
+                
                 cout << "Which option do you want to do?" << endl;
                 printf("1. Insertion - Finding time taken\n2. Search\n3. Exit Chaining Method\nChoice: ");
                 cin >> choiceSelection;
@@ -304,7 +313,8 @@ void linearProbing()
 
                 if(choiceSelection == 1)
                 {
-                    //linearHashTable->clear();
+                    system("cls");
+                    linearHashTable->clear();
                     auto start = std::chrono::high_resolution_clock::now();
                     string tempString;
                     
@@ -327,9 +337,11 @@ void linearProbing()
 
                         tempString = "";
                     }
+                    
                     auto end = std::chrono::high_resolution_clock::now();
                     auto duration = std::chrono::duration_cast<std::chrono::seconds>(end - start);
 
+                    datasetEntryFile.close();
                     linearHashTable->displayHashMap();
                     cout << "Duration of insertion of email dataset A using Linear Probing Method: " << duration.count() << " seconds" << endl;
                 }
@@ -392,7 +404,9 @@ void linearProbing()
 
                 if(choiceSelection == 1)
                 {
-                    //linearHashTable->clear();
+                    system("cls");
+                    cout << "This will take a while, please wait for a moment.\n" << endl;
+                    linearHashTable->clear();
                     auto start = std::chrono::high_resolution_clock::now();
                     string tempString;
                     
@@ -419,6 +433,7 @@ void linearProbing()
                     auto duration = std::chrono::duration_cast<std::chrono::seconds>(end - start);
 
                     linearHashTable->displayHashMap();
+                    datasetEntryFile.close();
                     cout << "Duration of insertion of email dataset A using Linear Probing Method: " << duration.count() << " seconds" << endl;
                 }
                 else if (choiceSelection == 2)
@@ -480,7 +495,9 @@ void linearProbing()
 
                 if(choiceSelection == 1)
                 {
-                    //linearHashTable->clear();
+                    system("cls");
+                    cout << "This will take a while, please wait for a moment.\n" << endl;
+                    linearHashTable->clear();
                     auto start = std::chrono::high_resolution_clock::now();
                     string tempString;
                     
@@ -506,6 +523,7 @@ void linearProbing()
                     auto end = std::chrono::high_resolution_clock::now();
                     auto duration = std::chrono::duration_cast<std::chrono::seconds>(end - start);
 
+                    datasetEntryFile.close();
                     linearHashTable->displayHashMap();
                     cout << "Duration of insertion of email dataset A using Linear Probing Method: " << duration.count() << " seconds" << endl;
                 }
