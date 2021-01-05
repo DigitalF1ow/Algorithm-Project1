@@ -25,7 +25,8 @@ void chainingMethod()
     */
 
     int choiceDataSet;
-    string searchString;
+    //string searchString;
+    string tempString;
     ifstream datasetEntryFile;
 
     int choiceSelection;
@@ -51,6 +52,7 @@ void chainingMethod()
         {
             system("cls");
             HashTable<string> ht(90);
+            
             while(true)
             {
                 cout << "----------------------------------------------" << endl;
@@ -58,8 +60,9 @@ void chainingMethod()
                 cout << "----------------------------------------------" << endl;
 
                 cout << "Which option do you want to do?" << endl;
-                printf("1. Insertion - Finding time taken\n2. Search\n3. Exit Chaining Method\nChoice: ");
+                printf("1. Insertion - Finding time taken\n2. Search with Email That Can be Found\n3. Search With Email That Cannot be Found\n4. Exit Chaining Method\nChoice: ");
                 cin >> choiceSelection;
+
                 while(cin.fail())
                 {
                     cout << "Please enter a valid number" << endl;
@@ -70,14 +73,14 @@ void chainingMethod()
                     
                 }
 
-                if(choiceSelection == 1)
+                if(choiceSelection == 1) //Insertion Using Chaining Method
                 {
                     ht.clear();
                     ht.resize(90);
                     system("cls");
                     cout << "This will take a while, please wait for a moment.\n" << endl;
                     auto start = std::chrono::high_resolution_clock::now();
-                    string tempString;
+                    
                     
                     datasetEntryFile.open("EmailsetA.txt");
                     while(!datasetEntryFile.eof()) // Getting all the lines from the file
@@ -93,30 +96,54 @@ void chainingMethod()
                     cout << ht << endl;
                     cout << "Duration of insertion of email dataset A using chaining Method: " << duration.count() << " seconds" << endl;
                 }
+                //Searching with Dataset that can be founded
                 else if (choiceSelection == 2 && ht.size() != 0)
                 {
-                    string target;
-                    while(true)
+                    datasetEntryFile.open("EmailSetFound.txt");
+                    cout << "Searching with a Dataset with items that can be found" << endl;
+                    while(!datasetEntryFile.eof())
                     {
-                        cout << "target to retrieve, type 0 to exit searching: " << endl;
-                        cin >> target;
-                        if(target == "0")
+                        getline(datasetEntryFile, tempString); //Getting the line into a tempString
+                        if (ht.retrieve(tempString))
                         {
-                            break;
+                            cout << tempString << " can be found in Dataset A" << endl;
                         }
-                        else if (ht.retrieve(target))
+                        else
                         {
-                            cout << "Target has been found!" << endl;
+                            cout << tempString << " cannot be found in Dataset A" << endl;
                         }
-                        else if (!(ht.retrieve(target)))
-                        {
-                            cout << "Target has been not been found!" << endl;
-                        }
+                        tempString = ""; //Reset the string
                     }
+                    datasetEntryFile.close();
                 }
-                else if (choiceSelection == 3)
+
+                //Search with Dataset that cannot be found 
+                else if (choiceSelection == 3 && ht.size() != 0)
+                {
+                    datasetEntryFile.open("EmailSetNotFound.txt");
+                    cout << "Searching with a Dataset with items that can be found" << endl;
+                    while(!datasetEntryFile.eof())
+                    {
+                        getline(datasetEntryFile, tempString); //Getting the line into a tempString
+                        if (ht.retrieve(tempString))
+                        {
+                            cout << tempString << " can be found in Dataset A" << endl;
+                        }
+                        else
+                        {
+                            cout << tempString << " cannot be found in Dataset A" << endl;
+                        }
+                        tempString = ""; //Reset the string
+                    }
+                    datasetEntryFile.close();
+                }
+                else if (choiceSelection == 4)
                 {
                     break;
+                }
+                else
+                {
+                    cout << "Dataset has not been inserted yet!" << endl;
                 }
                 
             }
@@ -133,7 +160,7 @@ void chainingMethod()
                 cout << "----------------------------------------------" << endl;
 
                 cout << "Which option do you want to do?" << endl;
-                printf("1. Insertion - Finding time taken\n2. Search\n3. Exit Chaining Method\nChoice: ");
+                printf("1. Insertion - Finding time taken\n2. Search with Email That Can be Found\n3. Search With Email That Cannot be Found\n4. Exit Chaining Method\nChoice: ");
                 cin >> choiceSelection;
                 while(cin.fail())
                 {
@@ -168,30 +195,54 @@ void chainingMethod()
                     cout << ht << endl;
                     cout << "Duration of insertion of email dataset B using chaining Method: " << duration.count() << " seconds" << endl;
                 }
+                //Searching with Dataset that can be founded
                 else if (choiceSelection == 2 && ht.size() != 0)
                 {
-                    string target;
-                    while(true)
+                    datasetEntryFile.open("EmailSetFound.txt");
+                    cout << "Searching with a Dataset with items that can be found" << endl;
+                    while(!datasetEntryFile.eof())
                     {
-                        cout << "target to retrieve, type 0 to exit searching: " << endl;
-                        cin >> target;
-                        if(target == "0")
+                        getline(datasetEntryFile, tempString); //Getting the line into a tempString
+                        if (ht.retrieve(tempString))
                         {
-                            break;
+                            cout << tempString << " can be found in Dataset B" << endl;
                         }
-                        else if (ht.retrieve(target))
+                        else
                         {
-                            cout << "Target has been found!" << endl;
+                            cout << tempString << " can be found in Dataset B" << endl;
                         }
-                        else if (!(ht.retrieve(target)))
-                        {
-                            cout << "Target has been not been found!" << endl;
-                        }
+                        tempString = ""; //Reset the string
                     }
+                    datasetEntryFile.close();
                 }
-                else if (choiceSelection == 3)
+
+                //Search with Dataset that cannot be found 
+                else if (choiceSelection == 3 && ht.size() != 0)
+                {
+                    datasetEntryFile.open("EmailSetNotFound.txt");
+                    cout << "Searching with a Dataset with items that can be found" << endl;
+                    while(!datasetEntryFile.eof())
+                    {
+                        getline(datasetEntryFile, tempString); //Getting the line into a tempString
+                        if (ht.retrieve(tempString))
+                        {
+                            cout << tempString << " can be found in Dataset B" << endl;
+                        }
+                        else
+                        {
+                            cout << tempString << " cannot be found in Dataset B" << endl;
+                        }
+                        tempString = ""; //Reset the string
+                    }
+                    datasetEntryFile.close();
+                }
+                else if (choiceSelection == 4)
                 {
                     break;
+                }
+                else
+                {
+                    cout << "Dataset has not been inserted yet!" << endl;
                 }
                 
             }
@@ -208,7 +259,7 @@ void chainingMethod()
                 cout << "----------------------------------------------" << endl;
 
                 cout << "Which option do you want to do?" << endl;
-                printf("1. Insertion - Finding time taken\n2. Search\n3. Exit Chaining Method\nChoice: ");
+                printf("1. Insertion - Finding time taken\n2. Search with Email That Can be Found\n3. Search With Email That Cannot be Found\n4. Exit Chaining Method\nChoice: ");
                 cin >> choiceSelection;
                 while(cin.fail())
                 {
@@ -243,33 +294,55 @@ void chainingMethod()
                     cout << ht << endl;
                     cout << "Duration of insertion of email dataset C using chaining Method: " << duration.count() << " seconds" << endl;
                 }
+                //Searching with Dataset that can be founded
                 else if (choiceSelection == 2 && ht.size() != 0)
                 {
-                    string target;
-                    while(true)
+                    datasetEntryFile.open("EmailSetFound.txt");
+                    cout << "Searching with a Dataset with items that can be found" << endl;
+                    while(!datasetEntryFile.eof())
                     {
-                        cout << "target to retrieve, type 0 to exit searching: " << endl;
-                        cin >> target;
-                        if(target == "0")
+                        getline(datasetEntryFile, tempString); //Getting the line into a tempString
+                        if (ht.retrieve(tempString))
                         {
-                            break;
+                            cout << tempString << " can be found in Dataset C" << endl;
                         }
-                        else if (ht.retrieve(target))
+                        else
                         {
-                            cout << "Target has been found!" << endl;
+                            cout << tempString << " can not be found in Dataset C" << endl;
                         }
-                        else if (!(ht.retrieve(target)))
-                        {
-                            cout << "Target has been not been found!" << endl;
-                        }
+                        tempString = ""; //Reset the string
                     }
-                    
+                    datasetEntryFile.close();
                 }
-                else if (choiceSelection == 3)
+
+                //Search with Dataset that cannot be found 
+                else if (choiceSelection == 3 && ht.size() != 0)
+                {
+                    datasetEntryFile.open("EmailSetNotFound.txt");
+                    cout << "Searching with a Dataset with items that can be found" << endl;
+                    while(!datasetEntryFile.eof())
+                    {
+                        getline(datasetEntryFile, tempString); //Getting the line into a tempString
+                        if (ht.retrieve(tempString))
+                        {
+                            cout << tempString << " can be found in Dataset C" << endl;
+                        }
+                        else
+                        {
+                            cout << tempString << " can not be found in Dataset C" << endl;
+                        }
+                        tempString = ""; //Reset the string
+                    }
+                    datasetEntryFile.close();
+                }
+                else if (choiceSelection == 4)
                 {
                     break;
                 }
-                
+                else
+                {
+                    cout << "Dataset has not been inserted yet!" << endl;
+                }            
             }
             break;
         }

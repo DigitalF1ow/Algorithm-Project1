@@ -156,7 +156,7 @@ class HashMap
             if(array[i] != NULL && array[i]->key != -1 && array[i]-> key != 0)
             {
                 cout << i << " = " << array[i] -> value << endl;
-                file << (array[i] -> value).c_str() << endl;
+                //file << (array[i] -> value).c_str() << endl;
             }            
         }
         //file.close();
