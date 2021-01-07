@@ -36,7 +36,7 @@ void chainingMethod()
         cout << ht << endl;
 
         auto end = std::chrono::high_resolution_clock::now();
-        auto duration = std::chrono::duration_cast<std::chrono::seconds>(end - start);
+        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
         cout << "Duration of insertion of email dataset A using chaining Method: " << duration.count() << " seconds" << endl;
 
         string target;
