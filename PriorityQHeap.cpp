@@ -116,6 +116,11 @@ int main ()
   ifstream dataEntryFile;
   PriorityQueue<string> priorityQueue;
   vector<string> emailDataset;
+
+  vector<string> datasetSelected;
+  vector<string> processSelected;
+
+  vector<double> timeDuration;
   //vector<string> timeRecord;
   int sizeDequeue;
   int datasetASize = 10; //to be changed to 100?
@@ -167,33 +172,56 @@ int main ()
           cout << "Enqueue of the Dataset A : Consist of 100 Email Addresses" << endl;
           cout << "---------------------------------------------------------\n" << endl;
           dataEntryFile.open("EmailSetA.txt");
+          datasetSelected.push_back("Dataset A"); //For Insertion Process
+          datasetSelected.push_back("Dataset A"); //For Search
 
-          auto iStart = std::chrono::system_clock::now();
+          if (dataEntryFile.is_open())
+		  {
+                system("cls"); //Clear the command prompt
+                processSelected.push_back("Enqueue/Insertion Process into Priority Queue");
 
-          while(!dataEntryFile.eof())
-          {
-            getline(dataEntryFile, emailString);
-            cout << emailString << "\t: ";
-            priorityQueue.enqueue (emailString);
-            priorityQueue.print();
-          }
+                auto iStart = std::chrono::system_clock::now();
 
-          auto iEnd = std::chrono::system_clock::now();
-          chrono::duration<double> iDuration = iEnd - iStart;
+              while(!dataEntryFile.eof())
+              {
+                getline(dataEntryFile, emailString);
+                cout << emailString << "\t: ";
+                priorityQueue.enqueue (emailString);
+                priorityQueue.print();
+              }
 
-          cout<<"Insert Time: ";
-          cout<<iDuration.count()<<"\n";
+              auto iEnd = std::chrono::system_clock::now();
+              auto iDuration = std::chrono::duration_cast<chrono::nanoseconds>(iEnd - iStart);
+              //Inserting Time Duration to Record History
+              timeDuration.push_back(iDuration.count() * 1e-9);
+              cout<<"Insert Time: ";
+              cout<<iDuration.count() * 1e-9 <<" seconds\n";
 
-          sizeDequeue = datasetASize * (0.1);
-          cout << "---------------------------------------------------------" << endl;
-          cout << "Dequeue of the Dataset A : Consist of 100 Email Addresses" << endl;
-          cout << "---------------------------------------------------------\n" << endl;
 
-          for (int i = 0; i < sizeDequeue; i++)
-          {
-            cout << "To be Dequeued: "<< priorityQueue.dequeue() << endl;
-            priorityQueue.print();
-          }
+
+              sizeDequeue = datasetASize * (0.1);
+              cout << "---------------------------------------------------------" << endl;
+              cout << "Dequeue of the Dataset A : Consist of 100 Email Addresses" << endl;
+              cout << "---------------------------------------------------------\n" << endl;
+
+
+              processSelected.push_back("Dequeue Process Priority Queue");
+			  auto sStart = std::chrono::high_resolution_clock::now();
+
+              for (int i = 0; i < sizeDequeue; i++)
+              {
+                cout << "To be Dequeued: "<< priorityQueue.dequeue() << endl;
+                priorityQueue.print();
+              }
+
+              auto sEnd = std::chrono::high_resolution_clock::now();
+              auto sDuration = std::chrono::duration_cast<chrono::nanoseconds>(sEnd - sStart);
+
+              timeDuration.push_back(sDuration.count() * 1e-9);
+
+              cout << "Dequeue Time: ";
+              cout << sDuration.count() * 1e-9 << " seconds\n";
+		  }
       }
       else if (dataSetChoice == 2)
       {
@@ -201,24 +229,54 @@ int main ()
           cout << "Enqueue of the Dataset B : Consist of 100000 Email Addresses" << endl;
           cout << "---------------------------------------------------------\n" << endl;
           dataEntryFile.open("EmailSetB.txt");
-          while(!dataEntryFile.eof())
-          {
-            getline(dataEntryFile, emailString);
-            cout << emailString << "\t: ";
-            priorityQueue.enqueue (emailString);
-            priorityQueue.print();
-          }
+          datasetSelected.push_back("Dataset B"); //For Insertion Process
+          datasetSelected.push_back("Dataset B"); //For Search
 
-          sizeDequeue = datasetBSize * (0.1);
-          cout << "---------------------------------------------------------" << endl;
-          cout << "Dequeue of the Dataset B : Consist of 100000 Email Addresses" << endl;
-          cout << "---------------------------------------------------------\n" << endl;
+          if (dataEntryFile.is_open())
+		  {
+                system("cls"); //Clear the command prompt
+                processSelected.push_back("Enqueue/Insertion Process into Priority Queue");
 
-          for (int i = 0; i < sizeDequeue; i++)
-          {
-            cout << "To be Dequeued: "<< priorityQueue.dequeue() << endl;
-            priorityQueue.print();
-          }
+                auto iStart = std::chrono::system_clock::now();
+
+              while(!dataEntryFile.eof())
+              {
+                getline(dataEntryFile, emailString);
+                cout << emailString << "\t: ";
+                priorityQueue.enqueue (emailString);
+                priorityQueue.print();
+              }
+
+              auto iEnd = std::chrono::system_clock::now();
+              auto iDuration = std::chrono::duration_cast<chrono::nanoseconds>(iEnd - iStart);
+              //Inserting Time Duration to Record History
+              timeDuration.push_back(iDuration.count() * 1e-9);
+              cout<<"Insert Time: ";
+              cout<<iDuration.count() * 1e-9 <<" seconds\n";
+
+              sizeDequeue = datasetBSize * (0.1);
+              cout << "---------------------------------------------------------" << endl;
+              cout << "Dequeue of the Dataset B : Consist of 100000 Email Addresses" << endl;
+              cout << "---------------------------------------------------------\n" << endl;
+
+
+              processSelected.push_back("Dequeue Process Priority Queue");
+              auto sStart = std::chrono::high_resolution_clock::now();
+
+              for (int i = 0; i < sizeDequeue; i++)
+              {
+                cout << "To be Dequeued: "<< priorityQueue.dequeue() << endl;
+                priorityQueue.print();
+              }
+
+              auto sEnd = std::chrono::high_resolution_clock::now();
+              auto sDuration = std::chrono::duration_cast<chrono::nanoseconds>(sEnd - sStart);
+
+              timeDuration.push_back(sDuration.count() * 1e-9);
+
+              cout << "Dequeue Time: ";
+              cout << sDuration.count() * 1e-9 << " seconds\n";
+		  }
       }
       else if (dataSetChoice == 3)
       {
@@ -226,29 +284,76 @@ int main ()
           cout << "Enqueue of the Dataset C : Consist of 500000 Email Addresses" << endl;
           cout << "---------------------------------------------------------\n" << endl;
           dataEntryFile.open("EmailSetC.txt");
-          while(!dataEntryFile.eof())
-          {
-            getline(dataEntryFile, emailString);
-            cout << emailString << "\t: ";
-            priorityQueue.enqueue (emailString);
-            priorityQueue.print();
-          }
+          datasetSelected.push_back("Dataset C"); //For Insertion Process
+          datasetSelected.push_back("Dataset C"); //For Search
 
-          sizeDequeue = datasetCSize * (0.1);
-          cout << "---------------------------------------------------------" << endl;
-          cout << "Dequeue of the Dataset C : Consist of 500000 Email Addresses" << endl;
-          cout << "---------------------------------------------------------\n" << endl;
+          if (dataEntryFile.is_open())
+		  {
+                system("cls"); //Clear the command prompt
+                processSelected.push_back("Enqueue/Insertion Process into Priority Queue");
 
-          for (int i = 0; i < sizeDequeue; i++)
-          {
-            cout << "To be Dequeued: "<< priorityQueue.dequeue() << endl;
-            priorityQueue.print();
-          }
+                auto iStart = std::chrono::system_clock::now();
+
+              while(!dataEntryFile.eof())
+              {
+                getline(dataEntryFile, emailString);
+                cout << emailString << "\t: ";
+                priorityQueue.enqueue (emailString);
+                priorityQueue.print();
+              }
+
+              auto iEnd = std::chrono::system_clock::now();
+              auto iDuration = std::chrono::duration_cast<chrono::nanoseconds>(iEnd - iStart);
+              //Inserting Time Duration to Record History
+              timeDuration.push_back(iDuration.count() * 1e-9);
+              cout<<"Insert Time: ";
+              cout<<iDuration.count() * 1e-9 <<" seconds\n";
+
+              sizeDequeue = datasetCSize * (0.1);
+              cout << "---------------------------------------------------------" << endl;
+              cout << "Dequeue of the Dataset C : Consist of 500000 Email Addresses" << endl;
+              cout << "---------------------------------------------------------\n" << endl;
+
+              processSelected.push_back("Dequeue Process Priority Queue");
+              auto sStart = std::chrono::high_resolution_clock::now();
+
+              for (int i = 0; i < sizeDequeue; i++)
+              {
+                cout << "To be Dequeued: "<< priorityQueue.dequeue() << endl;
+                priorityQueue.print();
+              }
+
+              auto sEnd = std::chrono::high_resolution_clock::now();
+              auto sDuration = std::chrono::duration_cast<chrono::nanoseconds>(sEnd - sStart);
+
+              timeDuration.push_back(sDuration.count() * 1e-9);
+
+              cout << "Dequeue Time: ";
+              cout << sDuration.count() * 1e-9 << " seconds\n";
+		  }
       }
     }
     else if(choiceSelection == 2)
     {
-        cout << "work in progress" << endl;
+        if (timeDuration.empty() && datasetSelected.empty() && processSelected.empty())
+			{
+				system("cls"); //Clear the command prompt
+				cout << "There is no dataset being inserted yet. Please make a process beforehand" << endl;
+			}
+			else
+			{
+				system("cls");
+				cout << "---------------------" << endl;
+				cout << "Time Duration History" << endl;
+				cout << "---------------------" << endl;
+
+				for (int i = 0; i < timeDuration.size(); i++)
+				{
+					cout << datasetSelected[i] << endl;
+					cout << processSelected[i] << endl;
+					cout << timeDuration[i] << endl << endl;
+				}
+			}
     }
     else if(choiceSelection == 3)
     {
