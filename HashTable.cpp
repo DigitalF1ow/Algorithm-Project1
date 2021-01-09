@@ -51,35 +51,7 @@ class HashTable {
     int location = hashfunction(newItem);
       table[location].insertFront(newItem);
   }
-
-//Insert a new key into hash table using Linear Probing
-  void insertLinearProbe(T newItem) 
-  {
-    int location = hashfunction(newItem);
-
-    //Loop till there is a empty index for the node
-    while(true)
-    {
-      if(table[location].isEmpty())
-      {
-        table[location].insertFront(newItem);
-        break;
-      }
-      else if(table[location].isEmpty() == false)
-      {
-        if(location < table.size())
-        {
-          location = location + 1;
-        }
-        else
-        {
-          break;
-        }
-        
-      }
-    }
-  }
-
+  
   //Getting the key from the hashtable
   bool retrieve (T & target) {
     int location = hashfunction(target);

@@ -71,6 +71,10 @@ class PriorityQueue {
   }
 
  public:
+    void clear()
+    {
+      EmailQueue.clear();
+    }
     void enqueue (T element)
     {
       EmailQueue.push_back (element); //Inserts the new element to the end of the vector
@@ -148,6 +152,8 @@ int main ()
     }
     system("cls");
 
+    priorityQueue.clear(); //Clear out the previous priority Queue done
+
     //Enqueue and Dequeue of the Dataset A
     if (choiceSelection == 1)
     {
@@ -165,7 +171,7 @@ int main ()
         cin >> dataSetChoice;
       }
       system("cls");
-
+      
       if (dataSetChoice == 1)
       {
           cout << "---------------------------------------------------------" << endl;
@@ -176,11 +182,11 @@ int main ()
           datasetSelected.push_back("Dataset A"); //For Search
 
           if (dataEntryFile.is_open())
-		  {
-                system("cls"); //Clear the command prompt
-                processSelected.push_back("Enqueue/Insertion Process into Priority Queue");
+		      {
+            system("cls"); //Clear the command prompt
+            processSelected.push_back("Enqueue/Insertion Process into Priority Queue");
 
-                auto iStart = std::chrono::system_clock::now();
+            auto iStart = std::chrono::system_clock::now();
 
               while(!dataEntryFile.eof())
               {
@@ -206,7 +212,7 @@ int main ()
 
 
               processSelected.push_back("Dequeue Process Priority Queue");
-			  auto sStart = std::chrono::high_resolution_clock::now();
+			        auto sStart = std::chrono::high_resolution_clock::now();
 
               for (int i = 0; i < sizeDequeue; i++)
               {
@@ -221,7 +227,7 @@ int main ()
 
               cout << "Dequeue Time: ";
               cout << sDuration.count() * 1e-9 << " seconds\n";
-		  }
+		    }
       }
       else if (dataSetChoice == 2)
       {
@@ -233,7 +239,7 @@ int main ()
           datasetSelected.push_back("Dataset B"); //For Search
 
           if (dataEntryFile.is_open())
-		  {
+		      {
                 system("cls"); //Clear the command prompt
                 processSelected.push_back("Enqueue/Insertion Process into Priority Queue");
 
@@ -276,7 +282,7 @@ int main ()
 
               cout << "Dequeue Time: ";
               cout << sDuration.count() * 1e-9 << " seconds\n";
-		  }
+		      }
       }
       else if (dataSetChoice == 3)
       {
@@ -288,7 +294,7 @@ int main ()
           datasetSelected.push_back("Dataset C"); //For Search
 
           if (dataEntryFile.is_open())
-		  {
+		      {
                 system("cls"); //Clear the command prompt
                 processSelected.push_back("Enqueue/Insertion Process into Priority Queue");
 
@@ -330,8 +336,10 @@ int main ()
 
               cout << "Dequeue Time: ";
               cout << sDuration.count() * 1e-9 << " seconds\n";
-		  }
+		      }
       }
+
+      dataEntryFile.close();
     }
     else if(choiceSelection == 2)
     {
