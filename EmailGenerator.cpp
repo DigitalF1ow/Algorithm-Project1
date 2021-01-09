@@ -170,7 +170,14 @@ int main()
     cout << "Creating a set of emails for Email Set Found" << endl;
     for (int i = 0; i < searchSize; i++)
     {
-        writerFile << setBEmail[i].c_str() << endl; 
+        if (i == searchSize - 1)
+        {
+            writerFile << setCEmail[i].c_str();
+        }
+        else
+        {
+            writerFile << setCEmail[i].c_str() << endl;
+        } 
     }
     writerFile.close();
 
@@ -179,7 +186,15 @@ int main()
     cout << "Creating a set of emails for Email Set Not Found" << endl;
     for (int i = 0; i < searchSize; i++)
     {
-        writerFile << setNotFound[i].c_str() << endl; 
+        if (i == searchSize - 1)
+        {
+            writerFile << setNotFound[i].c_str();
+        }
+        else
+        {
+            writerFile << setNotFound[i].c_str() << endl; 
+        }
+        
     }
     writerFile.close();
     

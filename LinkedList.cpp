@@ -18,15 +18,17 @@ class LinkedList {
  public:
   LinkedList() { start = NULL; }
   ~LinkedList() { makeEmpty(); }
-  // inserts at the beginning of the linked list
-  void insertFront (T & element ) {
+  // inserts at the front of the linked list
+  void insertFront (T & element ) 
+  {
     Node<T> *newNode = new Node<T>;
     newNode->info = element;
     newNode->next = start;
     start = newNode;
   }
   // returns true if element is found; returns false if element is not found
-  bool find (T & target) {
+  bool find (T & target) 
+  {
     bool found = false;
     Node<T> *ptr = start;
     while (ptr != NULL && !found) {
@@ -38,15 +40,20 @@ class LinkedList {
     }
     return found;
   }
-  bool isEmpty() { return start == NULL; }
-  void makeEmpty() {
+  bool isEmpty() //Check if the linked list is empty
+  { 
+    return start == NULL; 
+  }
+  void makeEmpty() //Making the linked list empty
+  {
     while (start != NULL) {
       Node<T> *ptr  = start;
       start = start->next;
       delete ptr;
     }
   }
-  friend ostream& operator<< (ostream& os, LinkedList<T>& list) {
+  friend ostream& operator<< (ostream& os, LinkedList<T>& list) 
+  {
     Node<T> *ptr = list.start;
     while (ptr != NULL) {
       os << ptr->info << " ";

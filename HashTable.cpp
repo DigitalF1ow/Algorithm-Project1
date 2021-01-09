@@ -29,19 +29,18 @@ class HashTable {
     for (int i = 0; i < table.size(); i++)
       table[i].makeEmpty();
   }
-
-  //Getting the size of the hash table
-  int size() 
+  
+  int size() //Getting the size of the hash table
   {
     return table.size();
   }
 
-  void clear()
+  void clear() //Clear the hash table
   {
     table.clear();
   }
 
-  void resize(int intResize)
+  void resize(int intResize) //Resizing the hash table 
   {
     table.resize(intResize);
   }

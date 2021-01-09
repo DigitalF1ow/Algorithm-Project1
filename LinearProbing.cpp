@@ -6,7 +6,7 @@ using namespace std;
 //template for the generic types
 template<typename K, typename V>
 
-//HashNode class for
+//HashNode class for key-value pair
 class HashNode
 {
     public:
@@ -34,7 +34,6 @@ class HashMap
     int collisions;
     //Dummy node 
     HashNode<K, V> *dummy;
-
     public:
     HashMap(int capacity)
     {
@@ -51,7 +50,6 @@ class HashMap
         //Dummy Node with value and key -1
         dummy = new HashNode<K,V> (-1,"");
     }
-
     //Hash function to find index for key
     int hashfunction(K key)
     {
@@ -59,7 +57,6 @@ class HashMap
         
         return index;
     }
-
     void clear()
     {
         //Reinitialize the elements of array as NULL
@@ -70,7 +67,6 @@ class HashMap
         collisions = 0;
         size = 0;
     }
-
     //Can insert any data type of node
     void insert(K key, V value)
     {
@@ -79,12 +75,20 @@ class HashMap
         //Finding hash index for
         int hashIndex = hashfunction(key);
 
-        //Finding next free space
-        while(array[hashIndex] != NULL && array[hashIndex] -> key != -1)
-        {   
-            collisions++;
-            hashIndex++;
-            hashIndex %= capacity;
+        while(true)
+        {
+            if(array[hashIndex] != NULL && array[hashIndex] -> key != -1)
+            {
+                collisions++;
+                hashIndex++;
+                hashIndex %= capacity;
+            }
+            else
+            { 
+                //Capacity is already full
+                break;
+            }
+            
         }
         
         //if a new node is inserted, increase the size, based from the constructor made -- Maybe need? Capacity got though
@@ -94,7 +98,6 @@ class HashMap
         }
         array[hashIndex] = tempNode;
     }
-
     //Function to search for the value for a given key. 
     //needs to be converted to a ascii value before calling function
     //Returns true or false
@@ -121,7 +124,6 @@ class HashMap
         //If it is not found, return null
         return false;
     }
-
     //Gets the index of where the key is. Does not affect the time taken if put the main program correctly
     //Returns Integer, Only used it when you found the key oredy
     int getIndex(int key)
@@ -141,12 +143,10 @@ class HashMap
         //If it is not found, return 0
         return 0;
     }
-
     int getSize()
     {
         return capacity;
     }
-
     void displayHashMap()
     {
         //ofstream file;

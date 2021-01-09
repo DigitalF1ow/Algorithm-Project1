@@ -71,18 +71,19 @@ class PriorityQueue {
   }
 
  public:
-    void clear()
+    void clear() //Clear elements in the EmailQueue vector
     {
       EmailQueue.clear();
     }
-    void enqueue (T element)
+    void enqueue (T element) //Inserts the element into the vector
     {
       EmailQueue.push_back (element); //Inserts the new element to the end of the vector
 
       heapEnqueue (EmailQueue.size() - 1);  // start at last element.
     }
 
-    T dequeue() {
+    T dequeue() //removes the lement from the vector from the highest to the lowest value
+    {
       T removed_element = EmailQueue[0];
       EmailQueue[0] = EmailQueue[EmailQueue.size()-1];          // copy last element to parent.
       EmailQueue.pop_back();                                    // remove last element.
@@ -176,6 +177,7 @@ int main ()
       
       if (dataSetChoice == 1)
       {
+          system("cls"); //Clear the command prompt
           cout << "---------------------------------------------------------" << endl;
           cout << "Enqueue of the Dataset A : Consist of 100 Email Addresses" << endl;
           cout << "---------------------------------------------------------\n" << endl;
@@ -185,7 +187,6 @@ int main ()
 
           if (dataEntryFile.is_open())
 		      {
-            system("cls"); //Clear the command prompt
             processSelected.push_back("Enqueue/Insertion Process into Priority Queue");
 
             auto iStart = std::chrono::system_clock::now();
@@ -193,9 +194,9 @@ int main ()
               while(!dataEntryFile.eof())
               {
                 getline(dataEntryFile, emailString);
-                cout << emailString << "\t: ";
+                //cout << emailString << "\t: ";
                 priorityQueue.enqueue (emailString);
-                priorityQueue.print();
+                //priorityQueue.print();
               }
 
               auto iEnd = std::chrono::system_clock::now();
@@ -219,7 +220,7 @@ int main ()
               for (int i = 0; i < sizeDequeue; i++)
               {
                 cout << "To be Dequeued: "<< priorityQueue.dequeue() << endl;
-                priorityQueue.print();
+                //priorityQueue.print();
               }
 
               auto sEnd = std::chrono::high_resolution_clock::now();
@@ -233,6 +234,7 @@ int main ()
       }
       else if (dataSetChoice == 2)
       {
+          system("cls"); //Clear the command prompt
           cout << "---------------------------------------------------------" << endl;
           cout << "Enqueue of the Dataset B : Consist of 100000 Email Addresses" << endl;
           cout << "---------------------------------------------------------\n" << endl;
@@ -242,17 +244,15 @@ int main ()
 
           if (dataEntryFile.is_open())
 		      {
-                system("cls"); //Clear the command prompt
+                
                 processSelected.push_back("Enqueue/Insertion Process into Priority Queue");
 
                 auto iStart = std::chrono::system_clock::now();
 
               while(!dataEntryFile.eof())
               {
-                getline(dataEntryFile, emailString);
-                cout << emailString << "\t: ";
+                getline(dataEntryFile, emailString);               
                 priorityQueue.enqueue (emailString);
-                priorityQueue.print();
               }
 
               auto iEnd = std::chrono::system_clock::now();
@@ -273,8 +273,7 @@ int main ()
 
               for (int i = 0; i < sizeDequeue; i++)
               {
-                cout << "To be Dequeued: "<< priorityQueue.dequeue() << endl;
-                priorityQueue.print();
+                priorityQueue.dequeue();
               }
 
               auto sEnd = std::chrono::high_resolution_clock::now();
@@ -288,6 +287,7 @@ int main ()
       }
       else if (dataSetChoice == 3)
       {
+          system("cls"); //Clear the command prompt
           cout << "---------------------------------------------------------" << endl;
           cout << "Enqueue of the Dataset C : Consist of 500000 Email Addresses" << endl;
           cout << "---------------------------------------------------------\n" << endl;
@@ -297,7 +297,7 @@ int main ()
 
           if (dataEntryFile.is_open())
 		      {
-                system("cls"); //Clear the command prompt
+                
                 processSelected.push_back("Enqueue/Insertion Process into Priority Queue");
 
                 auto iStart = std::chrono::system_clock::now();
@@ -305,9 +305,7 @@ int main ()
               while(!dataEntryFile.eof())
               {
                 getline(dataEntryFile, emailString);
-                cout << emailString << "\t: ";
                 priorityQueue.enqueue (emailString);
-                priorityQueue.print();
               }
 
               auto iEnd = std::chrono::system_clock::now();
@@ -327,8 +325,7 @@ int main ()
 
               for (int i = 0; i < sizeDequeue; i++)
               {
-                cout << "To be Dequeued: "<< priorityQueue.dequeue() << endl;
-                priorityQueue.print();
+                priorityQueue.dequeue();
               }
 
               auto sEnd = std::chrono::high_resolution_clock::now();
