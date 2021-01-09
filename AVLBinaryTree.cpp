@@ -271,6 +271,7 @@ int main()
 		//Check if ifstream opens any file
 		if (readFile.is_open())
 		{
+			ifstream searcherFile;
 			system("cls"); //Clear the command prompt
 
 			cout << "-----------------------------------" << endl;
@@ -282,7 +283,7 @@ int main()
 			auto iStart = std::chrono::high_resolution_clock::now();
 
 			//Looping till there is no more lines
-			while (getline (readFile, tempString))
+			while (getline(readFile, tempString))
 			{
 				root = insert(root, tempString);
 			}
@@ -293,7 +294,7 @@ int main()
 
 			//Inserting Time Duration to Record History
 			timeDuration.push_back(iDuration.count() * 1e-9);
-
+			readFile.close();
 			cout<<"Insert Time: ";
 			cout << iDuration.count() * 1e-9 <<" seconds\n\n";
 
@@ -301,7 +302,8 @@ int main()
 			printf("Search Process of AVL Binary Tree\n");
 			printf("  Search Data That Can Be Found  \n");
 			cout << "--------------------------------" << endl;
-			ifstream searcherFile;
+
+			
 
 			searcherFile.open("EmailSetFound.txt");
 			//preOrder(root);
@@ -311,7 +313,7 @@ int main()
 			auto sStart = std::chrono::high_resolution_clock::now();
 
 			//Searching Process
-			while(getline (searcherFile, word))
+			while(!searcherFile.eof())
 			{
 				getline(searcherFile, word);
 				if(Search(root,word) == true)
@@ -338,7 +340,7 @@ int main()
 
 			searcherFile.open("EmailSetNotFound.txt");
 
-			while(getline (searcherFile, word))
+			while(!searcherFile.eof())
 			{
 				getline(searcherFile, word);
 				if(Search(root,word) == true)

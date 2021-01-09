@@ -4,6 +4,7 @@
 #include <ctime>
 #include <chrono>
 #include <string>
+#include <iomanip>
 
 //Files linked
 #include "HashTable.cpp"
@@ -25,15 +26,13 @@ void chainingMethod()
     */
 
     //For storing the time duration history
-    vector<double> timeDuration;
+    vector<float> timeDuration;
     vector<string> datasetSelected;
     vector<string> processSelected;
 
     HashTable<string> htA(0);
     HashTable<string> htB(0);
     HashTable<string> htC(0);
-
-    
 
     int choiceDataSet;
     string tempString;
@@ -175,8 +174,8 @@ void chainingMethod()
             case 2: //Search With Email Can be Found
             {
 
-                double totalTime;
-                double avgTime;
+                float totalTime = 0;
+                float avgTime = 0;
                 cout << "What email dataset would you want to choose?" << endl;
                 printf("1. Dataset A\n2. Dataset B\n3. Dataset C\nChoice: ");
                 
@@ -229,6 +228,8 @@ void chainingMethod()
                     timeDuration.push_back(avgTime);
 
                     datasetEntryFile.close();
+                    avgTime = 0;
+                    totalTime = 0;
                 }
                 else if (choiceSelection == 2) //Dataset B
                 {
@@ -249,7 +250,8 @@ void chainingMethod()
                         {
                             auto end = std::chrono::high_resolution_clock::now();
                             auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-                            cout << tempString << " can be found in Dataset B - Time Taken: " << duration.count() * 1e-9 << " seconds" << endl;
+                            //cout << tempString << " can be found in Dataset B - Time Taken: " << duration.count() * 1e-9 << " seconds" << endl;
+                            printf("Time measured: %.10f seconds.\n", duration.count() * 1e-9);
 
                             totalTime += duration.count() * 1e-9;
                         }
@@ -264,7 +266,10 @@ void chainingMethod()
                     }
                     avgTime = (totalTime/10);
                     timeDuration.push_back(avgTime);
+                    cout << avgTime << " seconds" << endl;
                     datasetEntryFile.close();
+                    avgTime = 0;
+                    totalTime = 0;
                 }
                 else if (choiceSelection == 3) //Dataset C
                 {
@@ -301,6 +306,8 @@ void chainingMethod()
 
                     avgTime = (totalTime/10);
                     timeDuration.push_back(avgTime);
+                    avgTime = 0;
+                    totalTime = 0;
                 }
                 else
                 {
@@ -324,12 +331,29 @@ void chainingMethod()
                 }
                 if(choiceSelection == 1) //Dataset A
                 {
-                    datasetEntryFile.open("EmailSetNotFound.txt");
+                    //datasetEntryFile.open("EmailSetNotFound.txt");
 
                     cout << "------------------------------------------------" << endl;
 			        printf("Searching Process of Dataset A - Chaining Method\n");
 			        cout << "------------------------------------------------" << endl;
                     cout << "Searching with a Dataset with items that cannot be found" << endl;
+
+                    cin >> tempString;
+                    auto start = std::chrono::high_resolution_clock::now();
+                    if (htA.retrieve(tempString))
+                    {
+                        auto end = std::chrono::high_resolution_clock::now();
+                        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+                        cout << tempString << " can be found in Dataset A - Time taken: " << duration.count() * 1e-9 << " seconds" << endl;;
+                    }
+                    else
+                    {
+                        auto end = std::chrono::high_resolution_clock::now();
+                        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+                        cout << tempString << " cannot be found in Dataset A - Time Taken: "<< duration.count() * 1e-9 << " seconds" << endl;;
+                    }
+                    tempString = ""; //Reset the string
+                    /*
                     while(!datasetEntryFile.eof())
                     {
                         auto start = std::chrono::high_resolution_clock::now();
@@ -349,6 +373,7 @@ void chainingMethod()
                         tempString = ""; //Reset the string
                     }
                     datasetEntryFile.close();
+                    */
                 }
                 else if (choiceSelection == 2) // Dataset B
                 {
@@ -424,6 +449,7 @@ void chainingMethod()
                 else
                 {
                     system("cls");
+                    cout << setprecision(7) << endl;
                     cout << "---------------------" << endl;
                     cout << "Time Duration History" << endl;
                     cout << "---------------------" << endl;
@@ -461,7 +487,8 @@ void linearProbing()
     //For Time Duration History
     vector<string> datasetSelected;
     vector<string> processSelected;
-    vector<double> timeDuration;
+    vector<float> timeDuration;
+    vector<float> searchDuration;
 
     //
     HashMap<int, string> *linearHashTableA = new HashMap<int, string>(150);
@@ -665,6 +692,11 @@ void linearProbing()
                     system("cls");
                     int asciiNum = 0;
                     int index = 0;
+                    double avgTime = 0;
+                    double totalTime = 0;
+
+                    datasetSelected.push_back("Email Dataset A");
+                    processSelected.push_back("Total Time Taken Search - Linear Probing");
 
                     datasetEntryFile.open("EmailSetFound.txt");
                     cout << "-----------------------------------------------" << endl;
@@ -676,7 +708,7 @@ void linearProbing()
                    
                     while(!datasetEntryFile.eof())
                     {
-                         auto start = std::chrono::high_resolution_clock::now();
+                        auto start = std::chrono::high_resolution_clock::now();
                         getline(datasetEntryFile, searchString); //Getting the line into a tempString
 
                         //Converting String to ASCII
@@ -692,6 +724,8 @@ void linearProbing()
 
                             cout << "Target has been found at index " << linearHashTableA->getIndex(asciiNum) << endl;
                             cout << "Time taken: " << duration.count() * 1e-9 << " seconds" << endl;
+
+                            totalTime += duration.count() * 1e-9;
                         }
                         else if (!(linearHashTableA->get(asciiNum)))
                         {
@@ -700,18 +734,27 @@ void linearProbing()
 
                             cout << "Target has been not been found!" << endl;
                             cout << "Time taken: " << duration.count() * 1e-9 << " seconds" << endl;
+
+                            totalTime += duration.count() * 1e-9;
                         }
 
                         searchString = ""; //Reset the string
                         asciiNum = 0;
                     }
                     datasetEntryFile.close();
+                    avgTime = (totalTime/10);
+                    timeDuration.push_back(avgTime);
                 }
                 else if(choiceSelection == 2)
                 {
                     system("cls");
                     int asciiNum = 0;
                     int index = 0;
+                    double avgTime = 0;
+                    double totalTime = 0;
+
+                    datasetSelected.push_back("Email Dataset B");
+                    processSelected.push_back("Total Time Taken Search - Linear Probing");
 
                     datasetEntryFile.open("EmailSetFound.txt");
                     cout << "-----------------------------------------------" << endl;
@@ -739,6 +782,8 @@ void linearProbing()
 
                             cout << "Target has been found at index " << linearHashTableB->getIndex(asciiNum) << endl;
                             cout << "Time taken: " << duration.count() * 1e-9 << " seconds" << endl;
+
+                            totalTime += duration.count() * 1e-9;
                         }
                         else if (!(linearHashTableB->get(asciiNum)))
                         {
@@ -747,18 +792,27 @@ void linearProbing()
 
                             cout << "Target has been not been found!" << endl;
                             cout << "Time taken: " << duration.count() * 1e-9 << " seconds" << endl;
+
+                            totalTime += duration.count() * 1e-9;
                         }
 
                         searchString = ""; //Reset the string
                         asciiNum = 0;
                     }
                     datasetEntryFile.close();
+                    avgTime = (totalTime/10);
+                    timeDuration.push_back(avgTime);
                 }
                 else if(choiceSelection == 3)
                 {
                     system("cls");
                     int asciiNum = 0;
                     int index = 0;
+                    double avgTime = 0;
+                    double totalTime = 0;
+
+                    datasetSelected.push_back("Email Dataset C");
+                    processSelected.push_back("Total Time Taken Search - Linear Probing");
 
                     datasetEntryFile.open("EmailSetFound.txt");
                     cout << "-----------------------------------------------" << endl;
@@ -767,9 +821,10 @@ void linearProbing()
 
                     cout << "Search with Search Data that can be found" << endl;
 
-                    auto start = std::chrono::high_resolution_clock::now();
+                   
                     while(!datasetEntryFile.eof())
                     {
+                        auto start = std::chrono::high_resolution_clock::now();
                         getline(datasetEntryFile, searchString); //Getting the line into a tempString
 
                         //Converting String to ASCII
@@ -785,6 +840,7 @@ void linearProbing()
 
                             cout << "Target has been found at index " << linearHashTableC->getIndex(asciiNum) << endl;
                             cout << "Time taken: " << duration.count() * 1e-9 << " seconds" << endl;
+                            totalTime += duration.count() * 1e-9;
                         }
                         else if (!(linearHashTableC->get(asciiNum)))
                         {
@@ -793,12 +849,15 @@ void linearProbing()
 
                             cout << "Target has been not been found!" << endl;
                             cout << "Time taken: " << duration.count() * 1e-9 << " seconds" << endl;
+                            totalTime += duration.count() * 1e-9;
                         }
 
                         searchString = ""; //Reset the string
                         asciiNum = 0;
                     }
                     datasetEntryFile.close();
+                    avgTime = (totalTime/10);
+                    timeDuration.push_back(avgTime);
                 }
                 else
                 {
@@ -979,7 +1038,7 @@ void linearProbing()
                 {
 
                     system("cls");
-
+                    cout << setprecision(7) << endl;
                     cout << "--------------------------------------" << endl;
                     cout << "Time Duration History - Linear Probing" << endl;
                     cout << "--------------------------------------" << endl;
@@ -987,7 +1046,7 @@ void linearProbing()
                     {   
                         cout << datasetSelected[i] << endl;
                         cout << processSelected[i] << endl;
-                        cout << timeDuration[i] << endl << endl;
+                        cout << timeDuration[i] << " seconds"<< endl << endl;
                     }
                 }
                 break;
