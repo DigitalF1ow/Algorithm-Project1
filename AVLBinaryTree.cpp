@@ -195,13 +195,13 @@ int main()
 
 	vector<string> datasetSelected;
 	vector<string> processSelected;
-	
+
 	vector<double> timeDuration;
 
     int setChoice;
 	while(true)
 	{
-		
+
 
 		cout << "----------------------------------------------" << endl;
 		printf("\t      AVL Binary Search Tree \t\n");
@@ -246,7 +246,7 @@ int main()
 				cout << "---------------------" << endl;
 
 				for (int i = 0; i < timeDuration.size(); i++)
-				{   
+				{
 					cout << datasetSelected[i] << endl;
 					cout << processSelected[i] << endl;
 					cout << timeDuration[i] << endl << endl;
@@ -267,7 +267,7 @@ int main()
 			//cout << tempString << endl;
 			root = insert(root, tempString);
 		}*/
-		
+
 		//Check if ifstream opens any file
 		if (readFile.is_open())
 		{
@@ -293,7 +293,7 @@ int main()
 
 			//Inserting Time Duration to Record History
 			timeDuration.push_back(iDuration.count() * 1e-9);
-			
+
 			cout<<"Insert Time: ";
 			cout << iDuration.count() * 1e-9 <<" seconds\n\n";
 
@@ -306,10 +306,10 @@ int main()
 			searcherFile.open("EmailSetFound.txt");
 			//preOrder(root);
 			string word;
-			
+
 			processSelected.push_back("Search Process AVL Binary Tree");
 			auto sStart = std::chrono::high_resolution_clock::now();
-			
+
 			//Searching Process
 			while(getline (searcherFile, word))
 			{
@@ -352,17 +352,17 @@ int main()
 				{
 					auto sEnd = std::chrono::high_resolution_clock::now();
 					auto sDuration = std::chrono::duration_cast<chrono::nanoseconds>(sEnd - sStart);
-					cout << word <<"cannot found\n";
+					cout << word <<" cannot be found\n";
 					cout << "Time Taken: " << sDuration.count() * 1e-9 << " seconds\n"<< endl;
 				}
 			}
 			searcherFile.close();
 			//preOrder(root);
-			
+
 
 			auto sEnd = std::chrono::high_resolution_clock::now();
 			auto sDuration = std::chrono::duration_cast<chrono::nanoseconds>(sEnd - sStart);
-			
+
 			timeDuration.push_back(sDuration.count() * 1e-9);
 
 			cout << "Search Time: ";
@@ -370,7 +370,7 @@ int main()
 
 			readFile.close();
 		}
-		
+
 	}
     return 0;
 }
