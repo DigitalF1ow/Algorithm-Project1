@@ -116,6 +116,8 @@ class PriorityQueue {
 
 int main ()
 {
+  system("cls");
+  
   string emailString;
   ifstream dataEntryFile;
   PriorityQueue<string> priorityQueue;

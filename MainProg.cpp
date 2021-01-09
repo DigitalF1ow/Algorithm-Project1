@@ -25,7 +25,7 @@ void chainingMethod()
     */
 
     //For storing the time duration history
-    vector<float> timeDuration;
+    vector<double> timeDuration;
     vector<string> datasetSelected;
     vector<string> processSelected;
 
@@ -402,7 +402,7 @@ void linearProbing()
     //For Time Duration History
     vector<string> datasetSelected;
     vector<string> processSelected;
-    vector<int> timeDuration;
+    vector<double> timeDuration;
 
     //
     HashMap<int, string> *linearHashTableA = new HashMap<int, string>(150);
@@ -418,7 +418,7 @@ void linearProbing()
         cout << "----------------------------------------------" << endl;
 
         cout << "Which option do you want to do?" << endl;
-        printf("1. Insertion - Finding time taken\n2. Search With Dataset Found Items\n3. Search With Dataset Not Found Items\n4. Exit Linear Probing\nChoice: ");
+        printf("1. Insertion - Finding time taken\n2. Search With Dataset Found Items\n3. Search With Dataset Not Found Items\n4. Time Duration History\n5. Exit Linear Probing\nChoice: ");
         cin >> choiceSelection;
         while(cin.fail())
         {
@@ -899,8 +899,12 @@ int main()
     while(true)
     {
         system("CLS");
+        cout << "----------------------------------------------" << endl;
+        cout << "Program 1 - Chaining Method and Linear Probing" << endl;
+        cout << "----------------------------------------------\n" << endl;
+
         cout << "Welcome to the program. Which type of algorithm do you want to set on?" << endl;
-        printf("1. Chaining Method\n2. Linear Probing\n3. Quit Program\nChoice: ");
+        printf("1. Chaining Method\n2. Linear Probing\n3. Quit Program\n\nChoice: ");
         cin >> choice;
         while(cin.fail())
         {
