@@ -1,5 +1,5 @@
 #include<bits/stdc++.h>
-#include <frstream>
+#include <fstream>
 using namespace std;
 
 // An AVL tree node
@@ -311,7 +311,7 @@ int main()
 			auto sStart = std::chrono::high_resolution_clock::now();
 			
 			//Searching Process
-			while(searcherFile.eof())
+			while(getline (searcherFile, word))
 			{
 				getline(searcherFile, word);
 				if(Search(root,word) == true)
@@ -319,13 +319,14 @@ int main()
 					auto sEnd = std::chrono::high_resolution_clock::now();
 					auto sDuration = std::chrono::duration_cast<chrono::nanoseconds>(sEnd - sStart);
 					cout << word <<" has been found\n";
-					cout << "Time Taken: " <<sDuration << " seconds\n";<< endl;
+					cout << "Time Taken: " << sDuration.count() * 1e-9 << " seconds\n"<< endl;
 				}
 				else
 				{
 					auto sEnd = std::chrono::high_resolution_clock::now();
 					auto sDuration = std::chrono::duration_cast<chrono::nanoseconds>(sEnd - sStart);
 					cout << word <<"cannot found\n";
+					cout << "Time Taken: " << sDuration.count() * 1e-9 << " seconds\n"<< endl;
 				}
 			}
 			searcherFile.close();
@@ -337,7 +338,7 @@ int main()
 
 			searcherFile.open("EmailSetNotFound.txt");
 
-			while(searcherFile.eof())
+			while(getline (searcherFile, word))
 			{
 				getline(searcherFile, word);
 				if(Search(root,word) == true)
@@ -345,13 +346,14 @@ int main()
 					auto sEnd = std::chrono::high_resolution_clock::now();
 					auto sDuration = std::chrono::duration_cast<chrono::nanoseconds>(sEnd - sStart);
 					cout << word <<" has been found\n";
-					cout << "Time Taken: " <<sDuration << " seconds\n";<< endl;
+					cout << "Time Taken: " <<sDuration.count() * 1e-9 << " seconds\n"<< endl;
 				}
 				else
 				{
 					auto sEnd = std::chrono::high_resolution_clock::now();
 					auto sDuration = std::chrono::duration_cast<chrono::nanoseconds>(sEnd - sStart);
 					cout << word <<"cannot found\n";
+					cout << "Time Taken: " << sDuration.count() * 1e-9 << " seconds\n"<< endl;
 				}
 			}
 			searcherFile.close();

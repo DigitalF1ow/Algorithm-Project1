@@ -174,6 +174,9 @@ void chainingMethod()
             }
             case 2: //Search With Email Can be Found
             {
+
+                double totalTime;
+                double avgTime;
                 cout << "What email dataset would you want to choose?" << endl;
                 printf("1. Dataset A\n2. Dataset B\n3. Dataset C\nChoice: ");
                 
@@ -188,8 +191,8 @@ void chainingMethod()
                 }
                 if(choiceSelection == 1) //Dataset A
                 {
-                    //datasetSelected.push_back("Email Dataset A");
-                    //processSelected.push_back("Total Time Taken Search");
+                    datasetSelected.push_back("Email Dataset A");
+                    processSelected.push_back("Average Time Taken Search");
 
                     datasetEntryFile.open("EmailSetFound.txt");
 
@@ -197,8 +200,8 @@ void chainingMethod()
 			        printf("Searching Process of Dataset A - Chaining Method\n");
 			        cout << "------------------------------------------------" << endl;
                     cout << "Searching with a Dataset with items that can be found" << endl;
+
                     //Beginning Total Search
-                    //auto startSearch = std::chrono::high_resolution_clock::now();
                     while(!datasetEntryFile.eof())
                     {
                         auto start = std::chrono::high_resolution_clock::now();
@@ -208,23 +211,30 @@ void chainingMethod()
                             auto endSearch = std::chrono::high_resolution_clock::now();
                             auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(endSearch - start);
                             cout << tempString << " can be found in Dataset A - Time taken: " << duration.count() * 1e-9 << " seconds" << endl;
+                            totalTime += duration.count() * 1e-9;
                         }
                         else
                         {
                             auto endSearch = std::chrono::high_resolution_clock::now();
                             auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(endSearch - start);
                             cout << tempString << " cannot be found in Dataset A - Time Taken: "<< duration.count() * 1e-9 << " seconds" << endl;
+                            totalTime += duration.count() * 1e-9;
                         }
                         tempString = ""; //Reset the string
                     }
 
                     //auto endTotal = std::chrono::high_resolution_clock::now();
                     //auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(endTotal - startSearch);
+                    avgTime = (totalTime/10);
+                    timeDuration.push_back(avgTime);
 
                     datasetEntryFile.close();
                 }
                 else if (choiceSelection == 2) //Dataset B
                 {
+                    datasetSelected.push_back("Email Dataset B");
+                    processSelected.push_back("Average Time Taken Search");
+
                     datasetEntryFile.open("EmailSetFound.txt");
 
                     cout << "------------------------------------------------" << endl;
@@ -239,22 +249,27 @@ void chainingMethod()
                         {
                             auto end = std::chrono::high_resolution_clock::now();
                             auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-
                             cout << tempString << " can be found in Dataset B - Time Taken: " << duration.count() * 1e-9 << " seconds" << endl;
+
+                            totalTime += duration.count() * 1e-9;
                         }
                         else
                         {
                             auto end = std::chrono::high_resolution_clock::now();
                             auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-
                             cout << tempString << " can be found in Dataset B" << duration.count() * 1e-9 << " seconds" << endl;;
+                            totalTime += duration.count() * 1e-9;
                         }
                         tempString = ""; //Reset the string
                     }
+                    avgTime = (totalTime/10);
+                    timeDuration.push_back(avgTime);
                     datasetEntryFile.close();
                 }
                 else if (choiceSelection == 3) //Dataset C
                 {
+                    datasetSelected.push_back("Email Dataset C");
+                    processSelected.push_back("Average Time Taken Search");
                     
                     datasetEntryFile.open("EmailSetFound.txt");
 
@@ -270,17 +285,22 @@ void chainingMethod()
                         {
                             auto end = std::chrono::high_resolution_clock::now();
                             auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-                            cout << tempString << " can be found in Dataset C" << duration.count() * 1e-9 << " seconds" << endl;;
+                            cout << tempString << " can be found in Dataset C" << duration.count() * 1e-9 << " seconds" << endl;
+                            totalTime += duration.count() * 1e-9;
                         }
                         else
                         {
                             auto end = std::chrono::high_resolution_clock::now();
                             auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-                            cout << tempString << " can not be found in Dataset C" << duration.count() * 1e-9 << " seconds" << endl;;
+                            cout << tempString << " can not be found in Dataset C" << duration.count() * 1e-9 << " seconds" << endl;
+                            totalTime += duration.count() * 1e-9;
                         }
                         tempString = ""; //Reset the string
                     }
                     datasetEntryFile.close();
+
+                    avgTime = (totalTime/10);
+                    timeDuration.push_back(avgTime);
                 }
                 else
                 {
