@@ -9,8 +9,9 @@ using namespace std;
 
 int main()
 {
-    cout << "Hello World" << endl;
-    cout << "We are going to randomize the emails into each of the following formats:" << endl;
+    cout << "---------------------------------" << endl;
+    cout << "Generating Random Email Addresses" << endl;
+    cout << "---------------------------------\n" << endl;
 
     static const char alphanum [] = {"ABCDEFGHIJKLMNOPQRSTUVWXYZ" "abcdefghijklmnopqrstuvwxyz" "1234567890"};
     string emaildom [] = {"net","org","my"};
@@ -112,7 +113,17 @@ int main()
     for (int i = 0; i < sizeA; i++)
     {
         //printf("Generated Email A %d: %s \n", i + 1, setAEmail[i].c_str()); --> Testing Purposes
-        writerFile << setAEmail[i].c_str() << endl; 
+
+        //Purpose for if else, avoid the extra line in the output txt file
+        if (i == sizeA - 1)
+        {
+            writerFile << setAEmail[i].c_str();
+        }
+        else
+        {
+            writerFile << setAEmail[i].c_str() << endl;
+        }
+         
         
     }
     writerFile.close();
@@ -122,7 +133,15 @@ int main()
     for (int i = 0; i < sizeB; i++)
     {
         //printf("Generated Email B %d: %s \n", i + 1, setBEmail[i].c_str()); --> Testing Purposes
-        writerFile << setBEmail[i].c_str() << endl;
+        
+        if (i == sizeB - 1)
+        {
+            writerFile << setBEmail[i].c_str();
+        }
+        else
+        {
+            writerFile << setBEmail[i].c_str() << endl;
+        }
     }
     writerFile.close();
     cout << "Creating a set of emails for Set C" << endl;
@@ -130,7 +149,16 @@ int main()
     for (int i = 0; i < sizeC; i++)
     {
         //printf("Generated Email C %d: %s \n", i + 1, setCEmail[i].c_str()); --> Testing Purposes
-        writerFile << setCEmail[i].c_str() << endl; 
+        
+
+        if (i == sizeC - 1)
+        {
+            writerFile << setCEmail[i].c_str();
+        }
+        else
+        {
+            writerFile << setCEmail[i].c_str() << endl;
+        } 
     }
     writerFile.close();
 

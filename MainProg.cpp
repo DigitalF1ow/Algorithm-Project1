@@ -414,7 +414,7 @@ void linearProbing()
     while (true)
     {
         cout << "----------------------------------------------" << endl;
-        printf("\t Linear Probing \t\n");
+        printf("\t     Linear Probing \t\n");
         cout << "----------------------------------------------" << endl;
 
         cout << "Which option do you want to do?" << endl;
