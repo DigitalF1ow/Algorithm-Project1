@@ -160,7 +160,7 @@ void preOrder(Node *root)
 {
 	if(root != NULL)
 	{
-		cout << root->key << " ";
+		cout << root->key << "-->"<< " ";
 		preOrder(root->left);
 		preOrder(root->right);
 	}
@@ -191,18 +191,22 @@ int main()
 	ifstream readFile;
 	string tempString;
 
+	double avgTime;
+	double totalTime;
+
 	Node *root = NULL;
 
 	vector<string> datasetSelected;
 	vector<string> processSelected;
+	vector<string> searchProcess;
 
+	vector<double> avgTimeTaken;
+	vector<double> avgTimeTakenX;
 	vector<double> timeDuration;
 
     int setChoice;
 	while(true)
 	{
-
-
 		cout << "----------------------------------------------" << endl;
 		printf("\t      AVL Binary Search Tree \t\n");
 		cout << "----------------------------------------------" << endl;
@@ -210,6 +214,15 @@ int main()
 		printf("1. Dataset A\n2. Dataset B\n3. Dataset C\n4. Time Duration History\n5. Quit \nChoice:");
 
 		cin >> setChoice;
+
+		while(cin.fail())
+		{
+			cout << "Please enter a valid number, not a letter/word"<< endl;
+			cin.clear();
+			cin.ignore();
+			printf("Choice:");
+			cin >> setChoice;
+		}
 
 		if (setChoice == 1)
 		{
@@ -249,7 +262,11 @@ int main()
 				{
 					cout << datasetSelected[i] << endl;
 					cout << processSelected[i] << endl;
-					cout << timeDuration[i] << endl << endl;
+					cout << timeDuration[i] << endl;
+					cout << "Average Time Taken with Search Data that can be founded\n"<< avgTimeTaken[i] << " seconds" << endl;
+					cout << "Average Time Taken with Search Data that can be founded\n"<< avgTimeTakenX[i] << " seconds\n" << endl;
+
+
 				}
 			}
 		}
@@ -261,17 +278,11 @@ int main()
 		{
 			cout << "Error - That is an invalid choice!" << endl;
 		}
-		/*while(!openFile.eof()) // Getting all the lines from the file
-		{
-			getline(openFile, tempString); //saves the line in temporary
-			//cout << tempString << endl;
-			root = insert(root, tempString);
-		}*/
 
 		//Check if ifstream opens any file
 		if (readFile.is_open())
 		{
-			ifstream searcherFile;
+			
 			system("cls"); //Clear the command prompt
 
 			cout << "-----------------------------------" << endl;
@@ -298,79 +309,143 @@ int main()
 			cout<<"Insert Time: ";
 			cout << iDuration.count() * 1e-9 <<" seconds\n\n";
 
-			cout << "--------------------------------" << endl;
-			printf("Search Process of AVL Binary Tree\n");
-			printf("  Search Data That Can Be Found  \n");
-			cout << "--------------------------------" << endl;
+			ifstream searcherFile;
+			string word;
+			while(true)
+			{
+				cout << "----------------------------------------------" << endl;
+				printf("\t      AVL Binary Search Tree \t\n");
+				cout << "----------------------------------------------" << endl;
+				cout << "What option would you like to do?" << endl;
+				printf("1. Search With Search Data That Can Be Found\n2. Search With Search Data That Cannot Be Found\n3. Display it in Pre-order Traversal\n4. Main Menu\nChoice:");
+
+				cin >> setChoice;
+
+				while(cin.fail())
+				{
+					cout << "Please enter a valid number, not a letter/word"<< endl;
+					cin.clear();
+					cin.ignore();
+					printf("Choice:");
+					cin >> setChoice;
+				}
+				if(setChoice == 1) //Search With Search Data Can Be Found
+				{
+					system("cls");
+					cout << "--------------------------------" << endl;
+					printf("Search Process of AVL Binary Tree\n");
+					printf("  Search Data That Can Be Found  \n");
+					cout << "--------------------------------" << endl;
+
+					searcherFile.open("EmailSetFound.txt");
+					//preOrder(root);
+
+					searchProcess.push_back("Search Process - Search Data That Can Be Found");
+					
+					//Searching Process
+					while(!searcherFile.eof())
+					{
+						auto sStart = std::chrono::high_resolution_clock::now();
+						getline(searcherFile, word);
+						if(Search(root,word) == true)
+						{
+							
+							cout << word <<" has been found\n";
+							auto sEnd = std::chrono::high_resolution_clock::now();
+							auto sDuration = std::chrono::duration_cast<chrono::nanoseconds>(sEnd - sStart);
+							cout << "Time Taken: " << sDuration.count() * 1e-9 << " seconds\n"<< endl;
+							totalTime += sDuration.count() * 1e-9;
+						}
+						else
+						{
+							
+							cout << word <<"cannot found\n";
+							auto sEnd = std::chrono::high_resolution_clock::now();
+							auto sDuration = std::chrono::duration_cast<chrono::nanoseconds>(sEnd - sStart);
+							cout << "Time Taken: " << sDuration.count() * 1e-9 << " seconds\n"<< endl;
+							totalTime += sDuration.count() * 1e-9;
+						}
+						word = "";
+					}
+					searcherFile.close();
+					avgTime = totalTime/10;
+					avgTimeTaken.push_back(avgTime);
+
+					cout << "Average Search Time with Search Data Can Be Founded: ";
+					cout << avgTime << " seconds\n";
+
+					totalTime = 0;
+					avgTime = 0;
+					
+				}
+				else if (setChoice == 2)
+				{
+					system("cls");
+					cout << "---------------------------------" << endl;
+					printf("Search Process of AVL Binary Tree\n");
+					printf(" Search Data That Cannot Be Found\n");
+					cout << "---------------------------------" << endl;
+
+					searchProcess.push_back("Search Process - Search Data That Cannot Be Found");
+
+					searcherFile.open("EmailSetNotFound.txt");
+
+					while(!searcherFile.eof())
+					{
+						auto sStart = std::chrono::high_resolution_clock::now();
+						getline(searcherFile, word);
+						if(Search(root,word) == true)
+						{
+							
+							cout << word <<" has been found\n";
+							auto sEnd = std::chrono::high_resolution_clock::now();
+							auto sDuration = std::chrono::duration_cast<chrono::nanoseconds>(sEnd - sStart);
+							cout << "Time Taken: " <<sDuration.count() * 1e-9 << " seconds\n"<< endl;
+							totalTime += sDuration.count() * 1e-9;
+						}
+						else
+						{
+							
+							cout << word <<" cannot be found\n";
+							auto sEnd = std::chrono::high_resolution_clock::now();
+							auto sDuration = std::chrono::duration_cast<chrono::nanoseconds>(sEnd - sStart);
+							cout << "Time Taken: " << fixed << setprecision(9) << sDuration.count() * 1e-9 << " seconds\n"<< endl;
+							totalTime += sDuration.count() * 1e-9;
+						}
+						word = "";
+					}
+					searcherFile.close();
+
+					avgTime = totalTime/10;
+					avgTimeTakenX.push_back(avgTime);
+
+					cout << "Average Search Time with Search Data Cannot Be Founded: ";
+					cout << avgTime << " seconds\n";
+
+					readFile.close();
+
+					totalTime = 0;
+					avgTime = 0;
+				}
+				else if (setChoice == 3)
+				{
+					system("cls");
+					cout << "Pre-order Traversal" << endl;
+					preOrder(root);
+					cout << "" << endl;
+				}
+				else if (setChoice == 4)
+				{
+					system("cls");
+					break;
+				}
+			}
 
 			
 
-			searcherFile.open("EmailSetFound.txt");
-			//preOrder(root);
-			string word;
+			
 
-			processSelected.push_back("Search Process AVL Binary Tree");
-			auto sStart = std::chrono::high_resolution_clock::now();
-
-			//Searching Process
-			while(!searcherFile.eof())
-			{
-				getline(searcherFile, word);
-				if(Search(root,word) == true)
-				{
-					auto sEnd = std::chrono::high_resolution_clock::now();
-					auto sDuration = std::chrono::duration_cast<chrono::nanoseconds>(sEnd - sStart);
-					cout << word <<" has been found\n";
-					cout << "Time Taken: " << sDuration.count() * 1e-9 << " seconds\n"<< endl;
-				}
-				else
-				{
-					auto sEnd = std::chrono::high_resolution_clock::now();
-					auto sDuration = std::chrono::duration_cast<chrono::nanoseconds>(sEnd - sStart);
-					cout << word <<"cannot found\n";
-					cout << "Time Taken: " << sDuration.count() * 1e-9 << " seconds\n"<< endl;
-				}
-			}
-			searcherFile.close();
-
-			cout << "---------------------------------" << endl;
-			printf("Search Process of AVL Binary Tree\n");
-			printf(" Search Data That Cannot Be Found\n");
-			cout << "---------------------------------" << endl;
-
-			searcherFile.open("EmailSetNotFound.txt");
-
-			while(!searcherFile.eof())
-			{
-				getline(searcherFile, word);
-				if(Search(root,word) == true)
-				{
-					auto sEnd = std::chrono::high_resolution_clock::now();
-					auto sDuration = std::chrono::duration_cast<chrono::nanoseconds>(sEnd - sStart);
-					cout << word <<" has been found\n";
-					cout << "Time Taken: " <<sDuration.count() * 1e-9 << " seconds\n"<< endl;
-				}
-				else
-				{
-					auto sEnd = std::chrono::high_resolution_clock::now();
-					auto sDuration = std::chrono::duration_cast<chrono::nanoseconds>(sEnd - sStart);
-					cout << word <<" cannot be found\n";
-					cout << "Time Taken: " << sDuration.count() * 1e-9 << " seconds\n"<< endl;
-				}
-			}
-			searcherFile.close();
-			//preOrder(root);
-
-
-			auto sEnd = std::chrono::high_resolution_clock::now();
-			auto sDuration = std::chrono::duration_cast<chrono::nanoseconds>(sEnd - sStart);
-
-			timeDuration.push_back(sDuration.count() * 1e-9);
-
-			cout << "Search Time: ";
-			cout << sDuration.count() * 1e-9 << " seconds\n";
-
-			readFile.close();
+			
 		}
 
 	}

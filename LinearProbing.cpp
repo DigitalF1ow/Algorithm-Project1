@@ -71,10 +71,8 @@ class HashMap
     void insert(K key, V value)
     {
         HashNode<K,V> *tempNode = new HashNode<K,V>(key, value);
-
         //Finding hash index for
         int hashIndex = hashfunction(key);
-
         while(true)
         {
             if(array[hashIndex] != NULL && array[hashIndex] -> key != -1)
@@ -87,8 +85,7 @@ class HashMap
             { 
                 //Capacity is already full
                 break;
-            }
-            
+            }   
         }
         
         //if a new node is inserted, increase the size, based from the constructor made -- Maybe need? Capacity got though
@@ -120,7 +117,6 @@ class HashMap
             hashIndex %= capacity;
         
         }
-
         //If it is not found, return null
         return false;
     }
