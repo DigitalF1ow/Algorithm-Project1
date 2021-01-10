@@ -143,6 +143,10 @@ class HashMap
     {
         return capacity;
     }
+    int getCollisions()
+    {
+        return collisions;
+    }
     void displayHashMap()
     {
         //ofstream file;
@@ -157,6 +161,6 @@ class HashMap
         }
         //file.close();
 
-        printf("\nNumber of Collisions detected: %d\n\n", collisions);
+        
     }
 };

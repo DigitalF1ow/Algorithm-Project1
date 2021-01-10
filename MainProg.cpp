@@ -48,7 +48,7 @@ void chainingMethod()
         printf("\t Chaining Method \t\n");
         cout << "----------------------------------------------" << endl;
 
-        cout << "Which option do you want to do?" << endl;
+        cout << fixed << setprecision(7) << "Which option do you want to do?" << endl;
         printf("1. Insertion - Finding time taken\n2. Search with Email That Can be Found\n3. Search With Email That Cannot be Found\n4. Time Duration History \n5. Exit Chaining Method\nChoice: ");
 
         cin >> choiceSelection;
@@ -99,6 +99,7 @@ void chainingMethod()
                         //cout << tempString << endl;
                         htA.insert(tempString);
                     }
+                    cout << endl;
                     auto endA = std::chrono::steady_clock::now();
                     auto durationA = std::chrono::duration_cast<chrono::nanoseconds>(endA - startA);
                     datasetEntryFile.close();
@@ -107,7 +108,7 @@ void chainingMethod()
 
                     //cout << htA << endl;
 
-                    cout << fixed << setprecision(7) << "Time Taken:\n" << durationA.count() * 1e-9 << " seconds\n" << endl;
+                    cout <<"Time Taken:\n" << durationA.count() * 1e-9 << " seconds\n" << endl;
                 }
                 else if (choiceSelection == 2)
                 {
@@ -139,7 +140,7 @@ void chainingMethod()
                     timeDuration.push_back(duration.count() * 1e-9); //To get the duration into the record
 
                     //cout << htB << endl;
-                    cout << setprecision(9) << "Time Taken:\n" << duration.count() * 1e-9 << " seconds\n" << endl;
+                    cout << "Time Taken:\n" << duration.count() * 1e-9 << " seconds\n" << endl;
                 }
                 else if (choiceSelection == 3)
                 {
@@ -170,7 +171,7 @@ void chainingMethod()
                     timeDuration.push_back(duration.count() * 1e-9); //To get the duration into the record
 
                     //cout << htC << endl;
-                    cout << setprecision(9) << "Time Taken:\n" << duration.count() * 1e-9 << " seconds\n" << endl;
+                    cout << "Time Taken:\n" << duration.count() * 1e-9 << " seconds\n" << endl;
                 }
                 break;
             }
@@ -210,16 +211,18 @@ void chainingMethod()
                         getline(datasetEntryFile, tempString); //Getting the line into a tempString
                         if (htA.retrieve(tempString))
                         {
+                            cout << tempString << " can be found in Dataset A\n";
                             auto endSearch = std::chrono::steady_clock::now();
                             auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(endSearch - start);
-                            cout << tempString << " can be found in Dataset A\nTime Taken: " << duration.count() * 1e-9 << " seconds\n" << endl;
+                            cout << "Time Taken: " << duration.count() * 1e-9 << " seconds\n" << endl;
                             totalTime += duration.count() * 1e-9;
                         }
                         else
                         {
+                            cout << tempString << " cannot be found in Dataset A\n";
                             auto endSearch = std::chrono::steady_clock::now();
                             auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(endSearch - start);
-                            cout << tempString << " cannot be found in Dataset A\nTime Taken: "<< duration.count() * 1e-9 << " seconds\n" << endl;
+                            cout << "Time Taken: " << duration.count() * 1e-9 << " seconds\n" << endl;
                             totalTime += duration.count() * 1e-9;
                         }
                         tempString = ""; //Reset the string
@@ -227,6 +230,8 @@ void chainingMethod()
 
                     avgTime = (totalTime/10);
                     timeDuration.push_back(avgTime);
+
+                    cout << "Average Time Taken: " << avgTime << " seconds\n" << endl;
 
                     datasetEntryFile.close();
                     avgTime = 0;
@@ -249,24 +254,26 @@ void chainingMethod()
                         getline(datasetEntryFile, tempString); //Getting the line into a tempString
                         if (htB.retrieve(tempString))
                         {
-                            auto end = std::chrono::steady_clock::now();
-                            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-                            cout << tempString << " can be found in Dataset B\nTime Taken: " << duration.count() * 1e-9 << " seconds\n" << endl;
-
+                            cout << tempString << " can be found in Dataset B\n";
+                            auto endSearch = std::chrono::steady_clock::now();
+                            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(endSearch - start);
+                            cout << "Time Taken: " << duration.count() * 1e-9 << " seconds\n" << endl;
                             totalTime += duration.count() * 1e-9;
                         }
                         else
                         {
-                            auto end = std::chrono::steady_clock::now();
-                            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-                            cout << tempString << " can be found in Dataset B\nTime Taken: " << duration.count() * 1e-9 << " seconds\n" << endl;;
+                            cout << tempString << " cannot be found in Dataset B\n";
+                            auto endSearch = std::chrono::steady_clock::now();
+                            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(endSearch - start);
+                            cout << "Time Taken: " << duration.count() * 1e-9 << " seconds\n" << endl;
                             totalTime += duration.count() * 1e-9;
                         }
                         tempString = ""; //Reset the string
                     }
                     avgTime = (totalTime/10);
                     timeDuration.push_back(avgTime);
-                    cout << avgTime << " seconds" << endl;
+                    cout << "Average Time Taken: " << avgTime << " seconds\n" << endl;
+
                     datasetEntryFile.close();
                     avgTime = 0;
                     totalTime = 0;
@@ -288,16 +295,18 @@ void chainingMethod()
                         getline(datasetEntryFile, tempString); //Getting the line into a tempString
                         if (htC.retrieve(tempString))
                         {
-                            auto end = std::chrono::steady_clock::now();
-                            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-                            cout << tempString << " can be found in Dataset C\nTime Taken: " << duration.count() * 1e-9 << " seconds\n" << endl;
+                            cout << tempString << " can be found in Dataset C\n";
+                            auto endSearch = std::chrono::steady_clock::now();
+                            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(endSearch - start);
+                            cout << "Time Taken: " << duration.count() * 1e-9 << " seconds\n" << endl;
                             totalTime += duration.count() * 1e-9;
                         }
                         else
                         {
-                            auto end = std::chrono::steady_clock::now();
-                            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-                            cout << tempString << " can not be found in Dataset C\nTime Taken:" << duration.count() * 1e-9 << " seconds\n" << endl;
+                            cout << tempString << " cannot be found in Dataset C\n";
+                            auto endSearch = std::chrono::steady_clock::now();
+                            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(endSearch - start);
+                            cout << "Time Taken: " << duration.count() * 1e-9 << " seconds\n" << endl;
                             totalTime += duration.count() * 1e-9;
                         }
                         tempString = ""; //Reset the string
@@ -306,6 +315,9 @@ void chainingMethod()
 
                     avgTime = (totalTime/10);
                     timeDuration.push_back(avgTime);
+
+                    cout << "Average Time Taken: " << avgTime << " seconds\n" << endl;
+
                     avgTime = 0;
                     totalTime = 0;
                 }
@@ -351,16 +363,18 @@ void chainingMethod()
                         getline(datasetEntryFile, tempString); //Getting the line into a tempString
                         if (htA.retrieve(tempString))
                         {
-                            auto end = std::chrono::steady_clock::now();
-                            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-                            cout << tempString << " can be found in Dataset A\nTime taken: " << duration.count() * 1e-9 << " seconds\n" << endl;
+                            cout << tempString << " can be found in Dataset A\n";
+                            auto endSearch = std::chrono::steady_clock::now();
+                            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(endSearch - start);
+                            cout << "Time Taken: " << duration.count() * 1e-9 << " seconds\n" << endl;
                             totalTime += duration.count() * 1e-9;
                         }
                         else
                         {
-                            auto end = std::chrono::steady_clock::now();
-                            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-                            cout << tempString << " cannot be found in Dataset A\nTime Taken: "<< duration.count() * 1e-9 << " seconds\n" << endl;
+                            cout << tempString << " cannot be found in Dataset A\n";
+                            auto endSearch = std::chrono::steady_clock::now();
+                            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(endSearch - start);
+                            cout << "Time Taken: " << duration.count() * 1e-9 << " seconds\n" << endl;
                             totalTime += duration.count() * 1e-9;
                         }
                         tempString = ""; //Reset the string
@@ -369,6 +383,7 @@ void chainingMethod()
 
                     avgTime = (totalTime/10);
                     timeDuration.push_back(avgTime);
+                    cout << "Average Time Taken: " << avgTime << " seconds\n" << endl;
                     avgTime = 0;
                     totalTime = 0;
                     
@@ -390,18 +405,18 @@ void chainingMethod()
                         getline(datasetEntryFile, tempString); //Getting the line into a tempString
                         if (htB.retrieve(tempString))
                         {
-                            auto end = std::chrono::steady_clock::now();
-                            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-
-                            cout << tempString << " can be found in Dataset B\nTime Taken: " << duration.count() * 1e-9 << " seconds" << endl;
+                            cout << tempString << " can be found in Dataset B\n";
+                            auto endSearch = std::chrono::steady_clock::now();
+                            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(endSearch - start);
+                            cout << "Time Taken: " << duration.count() * 1e-9 << " seconds\n" << endl;
                             totalTime += duration.count() * 1e-9;
                         }
                         else
                         {
-                            auto end = std::chrono::steady_clock::now();
-                            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-
-                            cout << tempString << " cannot be found in Dataset B\nTime Taken: " << duration.count() * 1e-9 << " seconds" << endl;
+                            cout << tempString << " cannot be found in Dataset B\n";
+                            auto endSearch = std::chrono::steady_clock::now();
+                            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(endSearch - start);
+                            cout << "Time Taken: " << duration.count() * 1e-9 << " seconds\n" << endl;
                             totalTime += duration.count() * 1e-9;
                         }
                         tempString = ""; //Reset the string
@@ -410,6 +425,7 @@ void chainingMethod()
 
                     avgTime = (totalTime/10);
                     timeDuration.push_back(avgTime);
+                    cout << "Average Time Taken: " << avgTime << " seconds\n" << endl;
                     avgTime = 0;
                     totalTime = 0;
                 }
@@ -430,17 +446,18 @@ void chainingMethod()
                         getline(datasetEntryFile, tempString); //Getting the line into a tempString
                         if (htC.retrieve(tempString))
                         {
-                            auto end = std::chrono::steady_clock::now();
-                            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-                            cout << tempString << " can be found in Dataset C\nTime Taken: " << duration.count() * 1e-9 << " seconds" << endl;
+                            cout << tempString << " can be found in Dataset C\n";
+                            auto endSearch = std::chrono::steady_clock::now();
+                            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(endSearch - start);
+                            cout << "Time Taken: " << duration.count() * 1e-9 << " seconds\n" << endl;
                             totalTime += duration.count() * 1e-9;
                         }
                         else
                         {
-                            auto end = std::chrono::steady_clock::now();
-                            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-                            cout << fixed;
-                            cout << tempString << " cannot be found in Dataset C\nTime Taken: " << setprecision(9) << duration.count() * 1e-9 << " seconds" << endl;
+                            cout << tempString << " cannot be found in Dataset C\n";
+                            auto endSearch = std::chrono::steady_clock::now();
+                            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(endSearch - start);
+                            cout << "Time Taken: " << duration.count() * 1e-9 << " seconds\n" << endl;
                             totalTime += duration.count() * 1e-9;
                         }
                         tempString = ""; //Reset the string
@@ -449,6 +466,7 @@ void chainingMethod()
 
                     avgTime = (totalTime/10);
                     timeDuration.push_back(avgTime);
+                    cout << "Average Time Taken: " << avgTime << " seconds\n" << endl;
                     avgTime = 0;
                     totalTime = 0;
                 }
@@ -467,7 +485,7 @@ void chainingMethod()
                 else
                 {
                     system("cls");
-                    cout << setprecision(7) << endl;
+                
                     cout << "---------------------------------------" << endl;
                     cout << "Time Duration History - Chaining Method" << endl;
                     cout << "---------------------------------------" << endl;
@@ -505,6 +523,7 @@ void linearProbing()
     //For Time Duration History
     vector<string> datasetSelected;
     vector<string> processSelected;
+    vector<int> collisionsDetected;
     vector<float> timeDuration;
     vector<float> searchDuration;
 
@@ -521,7 +540,7 @@ void linearProbing()
         printf("\t     Linear Probing \t\n");
         cout << "----------------------------------------------" << endl;
 
-        cout << "Which option do you want to do?" << endl;
+        cout << fixed << setprecision(7) << "Which option do you want to do?" << endl;
         printf("1. Insertion - Finding time taken\n2. Search With Dataset Found Items\n3. Search With Dataset Not Found Items\n4. Time Duration History\n5. Exit Linear Probing\nChoice: ");
         cin >> choiceSelection;
         while(cin.fail())
@@ -536,7 +555,7 @@ void linearProbing()
         {
             case 1: //Insertion Process Via Linear Probing
             {   
-                cout << fixed << setprecision(7) << "What dataset would you want to choose?" << endl;
+                cout << "What dataset would you want to choose?" << endl;
                 printf("1. Dataset A\n2. Dataset B\n3. Dataset C\nChoice: ");
                 
                 cin >> choiceSelection;
@@ -590,7 +609,9 @@ void linearProbing()
                     timeDuration.push_back(duration.count() * 1e-9);
 
                     datasetEntryFile.close();
-                    //linearHashTableA->displayHashMap();
+
+                    printf("\nNumber of Collisions detected: %d\n\n", linearHashTableA->getCollisions());
+                    collisionsDetected.push_back(linearHashTableA->getCollisions());
 
                     cout << "Time Taken: " << duration.count() * 1e-9 << " seconds\n" << endl;
                 }
@@ -624,6 +645,7 @@ void linearProbing()
                         }
 
                         linearHashTableB->insert(asciiNum, tempString);
+                        
 
                         tempString = "";
                     }
@@ -635,7 +657,8 @@ void linearProbing()
                     timeDuration.push_back(duration.count() * 1e-9);
 
                     datasetEntryFile.close();
-                    //linearHashTableB->displayHashMap();
+                    printf("\nNumber of Collisions detected: %d\n\n", linearHashTableB->getCollisions());
+                    collisionsDetected.push_back(linearHashTableB->getCollisions());
 
                     cout << "Time Taken:\n" << duration.count() * 1e-9 << " seconds\n" << endl;
                 }
@@ -680,7 +703,8 @@ void linearProbing()
                     timeDuration.push_back(duration.count() * 1e-9);
 
                     datasetEntryFile.close();
-                    //linearHashTableC->displayHashMap();
+                    printf("\nNumber of Collisions detected: %d\n\n", linearHashTableC->getCollisions());
+                    collisionsDetected.push_back(linearHashTableC->getCollisions());
 
                     cout << "Time Taken:\n" << duration.count() * 1e-9 << " seconds\n" << endl;
                 }
@@ -738,20 +762,18 @@ void linearProbing()
                         
                         if (linearHashTableA->get(asciiNum))
                         {
+                            cout << "Target has been found" << endl;
                             auto end = std::chrono::steady_clock::now();
                             auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-
-                            cout << "Target has been found at index " << linearHashTableA->getIndex(asciiNum) << endl;
                             cout << "Time taken: " << duration.count() * 1e-9 << " seconds" << endl;
 
                             totalTime += duration.count() * 1e-9;
                         }
                         else if (!(linearHashTableA->get(asciiNum)))
                         {
+                            cout << "Target has been not been found!" << endl;
                             auto end = std::chrono::steady_clock::now();
                             auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-
-                            cout << "Target has been not been found!" << endl;
                             cout << "Time taken: " << duration.count() * 1e-9 << " seconds" << endl;
 
                             totalTime += duration.count() * 1e-9;
@@ -764,6 +786,9 @@ void linearProbing()
 
                     avgTime = (totalTime/10);
                     timeDuration.push_back(avgTime);
+
+                    cout << "Average Time Taken: " << avgTime << " seconds\n" << endl;
+
                     avgTime = 0;
                     totalTime = 0;
                 }
@@ -800,20 +825,18 @@ void linearProbing()
                         
                         if (linearHashTableB->get(asciiNum))
                         {
+                            cout << "Target has been found" << endl;
                             auto end = std::chrono::steady_clock::now();
                             auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-
-                            cout << "Target has been found at index " << linearHashTableB->getIndex(asciiNum) << endl;
                             cout << "Time taken: " << duration.count() * 1e-9 << " seconds" << endl;
 
                             totalTime += duration.count() * 1e-9;
                         }
                         else if (!(linearHashTableB->get(asciiNum)))
                         {
+                            cout << "Target cannot been found" << endl;
                             auto end = std::chrono::steady_clock::now();
                             auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-
-                            cout << "Target has been not been found!" << endl;
                             cout << "Time taken: " << duration.count() * 1e-9 << " seconds" << endl;
 
                             totalTime += duration.count() * 1e-9;
@@ -826,6 +849,8 @@ void linearProbing()
 
                     avgTime = (totalTime/10);
                     timeDuration.push_back(avgTime);
+
+                    cout << "Average Time Taken: " << avgTime << " seconds\n" << endl;
                     avgTime = 0;
                     totalTime = 0;
                 }
@@ -861,20 +886,20 @@ void linearProbing()
                         
                         if (linearHashTableC->get(asciiNum))
                         {
+                            cout << "Target has been found" << endl;
                             auto end = std::chrono::steady_clock::now();
                             auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-
-                            cout << "Target has been found at index " << linearHashTableC->getIndex(asciiNum) << endl;
                             cout << "Time taken: " << duration.count() * 1e-9 << " seconds" << endl;
+
                             totalTime += duration.count() * 1e-9;
                         }
                         else if (!(linearHashTableC->get(asciiNum)))
                         {
+                            cout << "Target cannot be found" << endl;
                             auto end = std::chrono::steady_clock::now();
                             auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-
-                            cout << "Target has been not been found!" << endl;
                             cout << "Time taken: " << duration.count() * 1e-9 << " seconds" << endl;
+
                             totalTime += duration.count() * 1e-9;
                         }
 
@@ -885,6 +910,7 @@ void linearProbing()
 
                     avgTime = (totalTime/10);
                     timeDuration.push_back(avgTime);
+                    cout << "Average Time Taken: " << avgTime << " seconds\n" << endl;
                     avgTime = 0;
                     totalTime = 0;
                 }
@@ -929,7 +955,6 @@ void linearProbing()
 
                     cout << "Search with Search Data that cannot be found" << endl;
 
-                    
                     while(!datasetEntryFile.eof())
                     {
                         auto start = std::chrono::steady_clock::now();
@@ -943,20 +968,20 @@ void linearProbing()
                         
                         if (linearHashTableA->get(asciiNum))
                         {
+                            cout << "Target has been found" << endl;
                             auto end = std::chrono::steady_clock::now();
                             auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-
-                            cout << "Target has been found at index " << linearHashTableA->getIndex(asciiNum) << endl;
                             cout << "Time taken: " << duration.count() * 1e-9 << " seconds" << endl;
+
                             totalTime += duration.count() * 1e-9;
                         }
                         else if (!(linearHashTableA->get(asciiNum)))
                         {
+                            cout << "Target cannot be found" << endl;
                             auto end = std::chrono::steady_clock::now();
                             auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-
-                            cout << "Target has been not been found!" << endl;
                             cout << "Time taken: " << duration.count() * 1e-9 << " seconds" << endl;
+
                             totalTime += duration.count() * 1e-9;
                         }
 
@@ -966,6 +991,8 @@ void linearProbing()
                     datasetEntryFile.close();
                     avgTime = (totalTime/10);
                     timeDuration.push_back(avgTime);
+
+                    cout << "Average Time Taken: " << avgTime << " seconds\n" << endl;
                     avgTime = 0;
                     totalTime = 0;
                 }
@@ -1002,19 +1029,18 @@ void linearProbing()
                         
                         if (linearHashTableB->get(asciiNum))
                         {
+                            cout << "Target has been found" << endl;
                             auto end = std::chrono::steady_clock::now();
                             auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-
-                            cout << "Target has been found at index " << linearHashTableB->getIndex(asciiNum) << endl;
                             cout << "Time taken: " << duration.count() * 1e-9 << " seconds" << endl;
+
                             totalTime += duration.count() * 1e-9;
                         }
                         else if (!(linearHashTableB->get(asciiNum)))
                         {
+                            cout << "Target cannot found" << endl;
                             auto end = std::chrono::steady_clock::now();
                             auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-
-                            cout << "Target has been not been found!" << endl;
                             cout << "Time taken: " << duration.count() * 1e-9 << " seconds" << endl;
 
                             totalTime += duration.count() * 1e-9;
@@ -1027,6 +1053,7 @@ void linearProbing()
 
                     avgTime = (totalTime/10);
                     timeDuration.push_back(avgTime);
+                    cout << "Average Time Taken: " << avgTime << " seconds\n" << endl;
                     avgTime = 0;
                     totalTime = 0;
                 }
@@ -1063,20 +1090,19 @@ void linearProbing()
                         
                         if (linearHashTableC->get(asciiNum))
                         {
+                            cout << "Target has been found" << endl;
                             auto end = std::chrono::steady_clock::now();
                             auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-
-                            cout << "Target has been found at index " << linearHashTableC->getIndex(asciiNum) << endl;
                             cout << "Time taken: " << duration.count() * 1e-9 << " seconds" << endl;
+
 
                             totalTime += duration.count() * 1e-9;
                         }
                         else if (!(linearHashTableC->get(asciiNum)))
                         {
+                            cout << "Target cannot found" << endl;
                             auto end = std::chrono::steady_clock::now();
                             auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-
-                            cout << "Target has been not been found!" << endl;
                             cout << "Time taken: " << duration.count() * 1e-9 << " seconds" << endl;
 
                             totalTime += duration.count() * 1e-9;
@@ -1089,6 +1115,7 @@ void linearProbing()
 
                     avgTime = (totalTime/10);
                     timeDuration.push_back(avgTime);
+                    cout << "Average Time Taken: " << avgTime << " seconds\n" << endl;
                     avgTime = 0;
                     totalTime = 0;
                 }
@@ -1113,10 +1140,10 @@ void linearProbing()
                     cout << "--------------------------------------" << endl;
                     for (int i = 0; i < timeDuration.size(); i++)
                     {   
-                        cout << setprecision(9) << endl;
-                        cout <<"Dataset         :"<< datasetSelected[i] << endl;
-                        cout <<"Process Selected:"<< processSelected[i] << endl;
-                        cout <<"Time Taken      :"<< timeDuration[i] << " seconds"<< endl << endl;
+                        cout <<"Dataset             :"<< datasetSelected[i] << endl;
+                        cout <<"Process Selected    :"<< processSelected[i] << endl;
+                        cout <<"Collisions Detected :" << collisionsDetected[i] << endl;
+                        cout <<"Time Taken          :"<< timeDuration[i] << " seconds"<< endl << endl;
                     }
                 }
                 break;
